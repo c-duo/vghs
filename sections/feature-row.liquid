@@ -1,0 +1,175 @@
+<div class="feature-row" data-section-id="{{ section.id }}" data-section-type="custom-html-section">
+    {% if section.settings.image != blank %}
+    <div class="feature-row__item feature-row__image lazyload" data-bgset="{% include 'bgset', image: section.settings.image %}">
+    <noscript>
+      <div class="feature-row__item feature-row__image lazyload" style="background-image: {{ section.settings.image | img_url: 'master' }}"></div>
+    </noscript>
+    {% else %}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    {% endif %}
+  </div>
+</div>
+
+
+
+{% schema %}
+{
+  "name": {
+    "cs": "Obrázek s textem",
+    "da": "Billede med tekst",
+    "de": "Foto mit Text",
+    "en": "Feature Row",
+    "es": "Imagen con texto",
+    "fi": "Kuva tekstillä",
+    "fr": "Image avec texte",
+    "it": "Immagine con testo",
+    "ja": "テキスト付き画像",
+    "ko": "텍스트 포함 이미지",
+    "nb": "Bilde med tekst",
+    "nl": "Afbeelding met tekst",
+    "pl": "Obraz z tekstem",
+    "pt-BR": "Imagem com texto",
+    "pt-PT": "Imagem com texto",
+    "sv": "Bild med text",
+    "th": "รูปภาพพร้อมข้อความ",
+    "tr": "Metin içeren görsel",
+    "vi": "Hình ảnh có chữ",
+    "zh-CN": "带文本的图片",
+    "zh-TW": "附文字的圖片"
+  },
+  "class": "index-section feature-row",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": {
+        "cs": "Obrázek",
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pl": "Obraz",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "tr": "Görsel",
+        "vi": "Hình ảnh",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": {
+        "cs": "Text tlačítka",
+        "da": "Knaptekst",
+        "de": "Schaltflächenbeschriftung",
+        "en": "Button label",
+        "es": "Etiqueta de botón",
+        "fi": "Tekstipainike",
+        "fr": "Texte du bouton",
+        "it": "Etichetta pulsante",
+        "ja": "ボタンのラベル",
+        "ko": "버튼 레이블",
+        "nb": "Knappetikett",
+        "nl": "Knoplabel",
+        "pl": "Przycisk z etykietą",
+        "pt-BR": "Etiqueta de botão",
+        "pt-PT": "Etiqueta do botão",
+        "sv": "Knappetikett",
+        "th": "ป้ายกำกับปุ่ม",
+        "tr": "Düğme etiketi",
+        "vi": "Nhãn nút",
+        "zh-CN": "按钮标签",
+        "zh-TW": "按鈕標籤"
+      }
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": {
+        "cs": "Tlačítkový odkaz",
+        "da": "Knaplink",
+        "de": "Schaltflächenlink",
+        "en": "Button link",
+        "es": "Enlace de botón",
+        "fi": "Painikelinkki",
+        "fr": "Lien du bouton",
+        "it": "Link pulsante",
+        "ja": "ボタンのリンク",
+        "ko": "버튼 링크",
+        "nb": "Kobling for knapp",
+        "nl": "Knoplink",
+        "pl": "Link przycisku",
+        "pt-BR": "Link de botão",
+        "pt-PT": "Ligação do botão",
+        "sv": "Knapplänk",
+        "th": "ลิงก์ปุ่ม",
+        "tr": "Düğme bağlantısı",
+        "vi": "Liên kết trên nút",
+        "zh-CN": "按钮链接",
+        "zh-TW": "按鈕連結"
+      }
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "cs": "Obrázek s textem",
+        "da": "Billede med tekst",
+        "de": "Foto mit Text",
+        "en": "Feature Row",
+        "es": "Imagen con texto",
+        "fi": "Kuva tekstillä",
+        "fr": "Image avec texte",
+        "it": "Immagine con testo",
+        "ja": "テキスト付き画像",
+        "ko": "텍스트 포함 이미지",
+        "nb": "Bilde med tekst",
+        "nl": "Afbeelding met tekst",
+        "pl": "Obraz z tekstem",
+        "pt-BR": "Imagem com texto",
+        "pt-PT": "Imagem com texto",
+        "sv": "Bild med text",
+        "th": "รูปภาพพร้อมข้อความ",
+        "tr": "Metin içeren görsel",
+        "vi": "Hình ảnh có chữ",
+        "zh-CN": "带文本的图片",
+        "zh-TW": "附文字的圖片"
+      },
+      "category": {
+        "cs": "Obrázek",
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pl": "Obraz",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "tr": "Görsel",
+        "vi": "Hình ảnh",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
+    }
+  ]
+}
+{% endschema %}

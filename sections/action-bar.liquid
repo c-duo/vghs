@@ -1,0 +1,378 @@
+<!-- snippets/action-bar.liquid -->
+{% comment %}
+  Action Bar
+    - Only appears on pages which contain a link that is in the action bar
+    - Exceptions: always on for collections. Always off for product.
+
+    To remove the action bar, remove or comment out `{% include 'action-bar' %}
+    anythwere it appears.
+{% endcomment %}
+
+{% assign action_bar_main_active = true %}
+{% for link in linklists[section.settings.action_bar_link_list].links %}
+  {% if link.active or request.page_type == 'index' or request.page_type == 'collection' %}
+    {% assign child_list_handle = link.title | handleize %}
+    {% if link.links == blank and link.active %}
+      {% assign action_bar_active_url = link.url %}
+    {% endif %}
+
+    {% if link.links != blank %}
+      {% for childlink in link.links %}
+        {% if childlink.active or link.active %}
+          {% assign active_child_link = true %}
+          {% assign active_child_link_handle = child_list_handle %}
+
+          {% comment %}
+            make sure we're handling duplicate links in the action bar and
+            sub action bar menus.
+          {% endcomment %}
+          {% if childlink.active.url == action_bar_active_url %}
+            {% assign action_bar_main_active = false %}
+          {% else %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+<style>
+  .site-header__logo img {
+    max-width: {{ section.settings.logo_width | escape | default: '180' | remove: 'px' | append: 'px' }};
+  }
+  @media screen and (max-width: 749px) {
+    .site-header__logo img {
+      max-width: 100%;
+    }
+  }
+</style>
+
+
+  <div class="action-bar-wrapper {% if section.settings.action_bar_link_list == blank %} hide {% endif %}" data-section-id="{{ section.id }}" data-section-type="action-bar-section">
+    
+    <div class="grid grid--no-gutters grid--table site-header__inner action-bar action-bar--has-menu">
+      <div class="grid__item one-third large-up--hide">
+        <button type="button" class="site-header__link text-link site-header__toggle-nav js-drawer-open-left">
+          <span class="icon icon-hamburger" aria-hidden="true"></span>
+          <span class="icon__fallback-text">{{ 'layout.navigation.menu' | t }}</span>
+        </button>
+      </div>
+      <div class="grid__item one-third large-up--one-sixth">
+        <div class="site-header__logo h1" itemscope itemtype="http://schema.org/Organization">
+
+          {%- if request.page_type == "index" -%}
+          {%- if section.settings.logo_slideshow != blank -%}
+          <a href="{{ routes.root_url }}" itemprop="url" class="site-header__logo-link">
+            {% capture image_size %}{{ section.settings.logo_width | escape }}x{% endcapture %}
+            <img class="site-header__logo-image" src="{{ section.settings.logo_slideshow | img_url: image_size }}"
+                 srcset="{{ section.settings.logo_slideshow | img_url: image_size }} 1x, {{ section.settings.logo_slideshow | img_url: image_size, scale: 2 }} 2x" alt="{{ shop.name }}" itemprop="logo">
+          </a>
+          {%- endif -%}
+          {%- else -%}
+          {%- if section.settings.logo != blank -%}
+          <a href="{{ routes.root_url }}" itemprop="url" class="site-header__logo-link">
+            {% capture image_size %}{{ section.settings.logo_width | escape }}x{% endcapture %}
+            <img class="site-header__logo-image" src="{{ section.settings.logo | img_url: image_size }}"
+                 srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x" alt="{{ shop.name }}" itemprop="logo">
+          </a>
+          {%- else -%}
+          <a href="{{ routes.root_url }}" class="site-header__link site-header__logo-link" itemprop="url">{{ shop.name }}</a>
+          {%- endif -%}
+          {%- endif -%}
+
+        </div>
+      </div>
+
+      <div class="grid__item two-thirds medium--hide small--hide">
+        <nav role="presentation">
+          <ul class="action-bar__menu--main action-bar__menu list--inline {% if action_bar_main_active %} action-bar--show{% endif %}" id="SiteNav" role="navigation">
+            {% comment %}
+            Assign which child linklist is associated with the action bar
+            link
+            {% endcomment %}
+            {% for link in linklists[section.settings.action_bar_link_list].links %}
+            {% assign child_list_handle = link.title | handleize %}
+            {% if link.links != blank %}
+            {% if child_list_handle == active_child_link_handle %}
+            {% assign active_children = true %}
+            {% else %}
+            {% assign active_children = false %}
+            {% endif %}
+            <li class="action-bar__menu-item action-bar--has-dropdown{% if link.active or active_children %} action-bar--active{% endif %}{% if active_children %} action-bar--disabled{% endif %}" data-child-list-handle="{{ child_list_handle }}" >
+              <a href="{{ link.url }}" class="action-bar__link" aria-controls="{{ child_list_handle | capitalize }}">{{ link.title }}</a>
+            </li>
+            {% else %}
+            <li class="action-bar__menu-item {% if link.active %}action-bar--active{% endif %}">
+              <a href="{{ link.url }}" class="action-bar__link">{{ link.title }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+
+          {% for link in linklists[section.settings.action_bar_link_list].links %}
+          {% assign child_list_handle = link.title | handleize %}
+          {% if link.links != blank %}
+          <ul class="action-bar__menu--sub action-bar__menu list--inline  {% if child_list_handle == active_child_link_handle %} action-bar--show{% endif %}" id="{{ child_list_handle | capitalize }}" data-child-list-handle="{{ child_list_handle }}" role="navigation">
+            <li>
+              <button type="button" class="btn action-bar__back action-bar__link" aria-controls="SiteNav">
+                <span class="icon icon-arrow-left" aria-hidden="true"></span>
+                <span class="icon__fallback-text">{{ 'layout.navigation.action_bar_back' | t }}</span>
+              </button>
+            </li>
+            {% for childlink in link.links %}
+            <li class="action-bar__menu-item {% if childlink.active %}action-bar--active{% endif %}">
+              <a href="{{ childlink.url }}" class="action-bar__link">{{ childlink.title | escape }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% endfor %}
+        </nav>
+      </div>
+
+      <div class="grid__item one-third large-up--one-sixth large-up--text-center medium--text-right small--text-right">
+        <a href="{{ routes.search_url }}" class="site-header__link site-header__search js-drawer-open-top">
+          <span class="icon icon-search" aria-hidden="true"></span>
+          <span class="icon__fallback-text">{{ 'layout.navigation.search' | t }}</span>
+        </a>
+        <a href="{{ routes.cart_url }}" class="site-header__link site-header__cart cart-link{% if settings.cart_type == 'drawer' %} js-drawer-open-right{% endif %}{% if cart.item_count > 0 %} cart-bubble--visible{% endif %}">
+          <span class="icon icon-cart" aria-hidden="true"></span>
+          <span class="icon__fallback-text">{{ 'layout.cart.title' | t }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+
+{% schema %}
+{
+  "name": {
+    "cs": "Lišta akcí",
+    "da": "Handlingslinje",
+    "de": "Aktionsleiste",
+    "en": "Action bar",
+    "es": "Barra de acciones",
+    "fi": "Toimintopalkki",
+    "fr": "Barre de menus",
+    "it": "Barra delle azioni",
+    "ja": "アクションバー",
+    "ko": "작업 모음",
+    "nb": "Handlingsfelt",
+    "nl": "Actiebalk",
+    "pl": "Pasek czynności",
+    "pt-BR": "Barra de ações",
+    "pt-PT": "Barra de ação",
+    "sv": "Åtgärdsfält",
+    "th": "แถบการดำเนินการ",
+    "tr": "İşlem çubuğu",
+    "vi": "Thanh thao tác",
+    "zh-CN": "操作栏",
+    "zh-TW": "動作列"
+  },
+  "class": "action-bar-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": {
+        "cs": "Logo",
+        "da": "Logo",
+        "de": "Logo",
+        "en": "Logo",
+        "es": "Logo",
+        "fi": "Logo",
+        "fr": "Logo",
+        "it": "Logo",
+        "ja": "ロゴ",
+        "ko": "로고",
+        "nb": "Logo",
+        "nl": "Logo",
+        "pl": "Logo",
+        "pt-BR": "Logo",
+        "pt-PT": "Logótipo",
+        "sv": "Logotyp",
+        "th": "โลโก้",
+        "tr": "Logo",
+        "vi": "Logo",
+        "zh-CN": "logo",
+        "zh-TW": "商標"
+      },
+      "info": {
+        "cs": "Maximálně 450 × 200 px",
+        "da": "Maks. 450 x 200 px",
+        "de": "Maximal 450 x 200 Pixel",
+        "en": "450 x 200px max",
+        "es": "450 x 200px máx.",
+        "fi": "Enintään 450 x 200 pikseliä",
+        "fr": "450 x 250 px max",
+        "it": "450 x 200 px max",
+        "ja": "最大450 x 200ピクセル",
+        "ko": "최대 450x200 픽셀",
+        "nb": "Maks 450 x 200 px",
+        "nl": "450 x 200px max",
+        "pl": "Maks. 450 x 200 px",
+        "pt-BR": "450 x 200 px máx.",
+        "pt-PT": "450 x 200 px máx.",
+        "sv": "450 x 200 px max",
+        "th": "สูงสุด 450 x 200 พิกเซล",
+        "tr": "Maksimum 450 x 200 piksel",
+        "vi": "Tối đa 450 x 200px",
+        "zh-CN": "最大 450 x 200 px",
+        "zh-TW": "最大 450 x 200 像素"
+      }
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_slideshow",
+      "label": {
+        "cs": "Logo na domovské stránce",
+        "da": "Logo på startside",
+        "de": "Startseitenlogo",
+        "en": "Home page logo",
+        "es": "Logo de la página de inicio",
+        "fi": "Etusivun logo",
+        "fr": "Logo de la page d'accueil",
+        "it": "Logo della home page",
+        "ja": "ホームページのロゴ",
+        "ko": "홈페이지 로고",
+        "nb": "Logo for startsiden",
+        "nl": "Logo homepage",
+        "pl": "Logo strony głównej",
+        "pt-BR": "Logo da página inicial",
+        "pt-PT": "Logótipo da página inicial",
+        "sv": "Hemsideslogo",
+        "th": "โลโก้หน้าแรก",
+        "tr": "Ana sayfa logosu",
+        "vi": "Logo trang chủ",
+        "zh-CN": "主页 logo",
+        "zh-TW": "首頁商標"
+      },
+      "info": {
+        "cs": "Zobrazit v prezentaci",
+        "da": "Vist i diasshow",
+        "de": "In Slideshow anzeigen",
+        "en": "Shown on slideshow",
+        "es": "Mostrado en diapositivas",
+        "fi": "Näkyy diaesityksessä",
+        "fr": "Affiché sur le diaporama",
+        "it": "Mostrato sulla presentazione",
+        "ja": "スライドショーに表示する",
+        "ko": "슬라이드쇼에 표시",
+        "nb": "Vist i lysbildefremvisning",
+        "nl": "Weergegeven op diavoorstelling",
+        "pl": "Wyświetlane w pokazie slajdów",
+        "pt-BR": "Exibido em slides",
+        "pt-PT": "Mostrado numa apresentação de diapositivos",
+        "sv": "Visas på bildspelet",
+        "th": "แสดงในสไลด์โชว์",
+        "tr": "Slayt gösterisinde gösterilir",
+        "vi": "Hiển thị trên bản trình chiếu",
+        "zh-CN": "显示在幻灯片上",
+        "zh-TW": "素材輪播"
+      }
+    },
+    {
+      "type": "text",
+      "id": "logo_width",
+      "label": {
+        "cs": "Šířka vlastního loga (v pixelech)",
+        "da": "Tilpasset logobredde (i pixels)",
+        "de": "Benutzerdefinierte Logobreite (Pixel)",
+        "en": "Custom logo width (in pixels)",
+        "es": "Ancho del logo personalizado (en píxeles)",
+        "fi": "Mukautettu logon leveys (pikseleinä)",
+        "fr": "Largeur personnalisée du logo (en pixels)",
+        "it": "Larghezza logo personalizzato (in pixel)",
+        "ja": "ロゴの幅をカスタマイズする (ピクセル単位)",
+        "ko": "사용자 지정 로고 폭 (픽셀)",
+        "nb": "Tilpasset logobredde (i piksler)",
+        "nl": "Aangepaste logobreedte (in pixels)",
+        "pl": "Niestandardowa szerokość logo (w pikselach)",
+        "pt-BR": "Largura do logo personalizado (em pixels)",
+        "pt-PT": "Largura de logótipo personalizada (em píxeis)",
+        "sv": "Anpassad logotypbredd (i pixlar)",
+        "th": "ความกว้างของโลโก้แบบกำหนดเอง (เป็นพิกเซล)",
+        "tr": "Özel logo genişliği (piksel)",
+        "vi": "Chiều rộng logo tùy chỉnh (pixel)",
+        "zh-CN": "自定义 logo 宽度（像素）",
+        "zh-TW": "自訂標誌寬度 (單位為像素)"
+      },
+      "default": {
+        "cs": "180",
+        "da": "180",
+        "de": "180",
+        "en": "180",
+        "es": "180",
+        "fi": "180",
+        "fr": "180",
+        "it": "180",
+        "ja": "180",
+        "ko": "180",
+        "nb": "180",
+        "nl": "180",
+        "pl": "180",
+        "pt-BR": "180",
+        "pt-PT": "180",
+        "sv": "180",
+        "th": "180",
+        "tr": "180",
+        "vi": "180",
+        "zh-CN": "180",
+        "zh-TW": "180"
+      }
+    },
+    {
+      "type": "link_list",
+      "id": "action_bar_link_list",
+      "label": {
+        "cs": "Nabídka",
+        "da": "Menu",
+        "de": "Menü",
+        "en": "Menu",
+        "es": "Menú",
+        "fi": "Valikko",
+        "fr": "Menu",
+        "it": "Menu",
+        "ja": "メニュー",
+        "ko": "메뉴",
+        "nb": "Meny",
+        "nl": "Menu",
+        "pl": "Menu",
+        "pt-BR": "Menu",
+        "pt-PT": "Menu",
+        "sv": "Meny",
+        "th": "เมนู",
+        "tr": "Menü",
+        "vi": "Menu",
+        "zh-CN": "菜单",
+        "zh-TW": "選單"
+      },
+      "default": "main-menu",
+      "info": {
+        "cs": "Tato nabídka poskytuje omezenou podporu pro položky rozevíracího seznamu",
+        "da": "Denne menu har begrænset understøttelse af rullemenupunkter",
+        "de": "Dieses Menü bietet eingeschränkte Unterstützung für Dropdown-Elemente",
+        "en": "This menu has limited support for dropdown items",
+        "es": "Este menú admite pocos elementos desplegables",
+        "fi": "Tässä valikossa on rajoitettu tuki pudotuskohteille",
+        "fr": "Ce menu a un support limité pour les éléments de liste déroulante",
+        "it": "Questo menu supporta gli elementi a discesa in modo limitato",
+        "ja": "このメニューではドロップダウンアイテムのサポートが制限されています。",
+        "ko": "이 메뉴는 드롭 다운 항목에 대한 지원이 제한되어 있습니다.",
+        "nb": "Denne menyen har begrenset støtte for rullegardinelementer",
+        "nl": "Dit menu heeft beperkte ondersteuning voor vervolgkeuzelijsten",
+        "pl": "W tym menu obsługa pozycji rozwijanych jest ograniczona",
+        "pt-BR": "Este menu tem suporte limitado para itens suspensos",
+        "pt-PT": "Este menu tem suporte limitado para itens pendentes",
+        "sv": "Den här menyn har begränsat stöd för listmenyobjekt",
+        "th": "เมนูนี้มีความช่วยเหลือที่จำกัดสำหรับรายการดรอปดาวน์",
+        "tr": "Bu menünün açılır öğe desteği sınırlıdır",
+        "vi": "Menu này hỗ trợ hạn chế các mục thả xuống",
+        "zh-CN": "本菜单支持的下拉项有限",
+        "zh-TW": "此選單對下拉式項目的支援有限"
+      }
+    }
+  ]
+}
+{% endschema %}
