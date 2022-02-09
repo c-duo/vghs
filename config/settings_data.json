@@ -139,7 +139,7 @@
         "type": "footer",
         "settings": {
           "footer_link_list": "footer",
-          "show_payment_icons": true
+          "show_payment_icons": false
         }
       },
       "collection-template": {
