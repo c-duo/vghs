@@ -466,55 +466,53 @@ var vendorPrefix = (function() {
  * Requires $.debounce function from theme.js
  */
 
-var slickTheme = (function(module, $) {
-  'use strict';
+class SlickTheme {
+  constructor(options) {
+    $ = jQuery;
+    console.log('slickTheme options', options);
 
-  // Public functions
-  var init, onInit, beforeChange, afterChange;
+    // // Public functions
+    // var init, onInit, beforeChange, afterChange;
 
-  // Private variables
-  var settings,
-    $slider,
-    $allSlides,
-    $activeSlide,
-    $slickDots,
-    $paginations,
-    $mobileDotsContainer,
-    windowHeight,
-    scrolled,
-    prefixedTransform;
-  var currentActiveSlide = 0;
+    // // Private variables
+    // var settings,
+    this.$slider = options.$element;
+    //   this.$allSlides,
+    //   this.$activeSlide,
+    //   this.$slickDots,
+    //   this.$paginations,
+    //   this.$mobileDotsContainer,
+    //   this.windowHeight,
+    //   this.scrolled,
+    //   this.prefixedTransform;
+    // var this.currentActiveSlide = 0;
 
-  // Private functions
-  var cacheObjects,
-    setFullScreen,
-    setPaginationAttributes,
-    adaptHeight,
-    showActiveContent,
-    keyboardNavigation,
-    togglePause,
-    sizeFullScreen,
-    setParallax,
-    calculateParallax,
-    slideshowA11ySetup;
+    // // Private functions
+    // var cacheObjects,
+    //   setFullScreen,
+    //   setPaginationAttributes,
+    //   adaptHeight,
+    //   showActiveContent,
+    //   keyboardNavigation,
+    //   togglePause,
+    //   sizeFullScreen,
+    //   setParallax,
+    //   calculateParallax,
+    //   slideshowA11ySetup;
 
-  /*============================================================================
-  Initialise the plugin and define global options
-  ==============================================================================*/
-  cacheObjects = function() {
-    slickTheme.cache = {
+    this.cache = {
       $html: $('html'),
       $window: $(window),
-      $hero: $('#Hero'),
-      $heroImage: $('.hero__image'),
-      $pauseButton: $('.hero__pause'),
-      $heroDotsWrapper: $('.hero__dots-wrapper'),
-      $heroDotsWrapperDesktop: $('.hero__dots-wrapper-desktop'),
-      $heroContentWrapperMobile: $('.hero__content-wrapper-mobile'),
-      $heroHeader: $('.hero__header')
+      $hero: options.$element, // TODO dynamic to the specific slideshow
+      $heroImage: options.$element.find('.hero__image'),
+      $pauseButton: options.$element.find('.hero__pause'),
+      $heroDotsWrapper: options.$element.find('.hero__dots-wrapper'),
+      $heroDotsWrapperDesktop: options.$element.find('.hero__dots-wrapper-desktop'),
+      $heroContentWrapperMobile: options.$element.find('.hero__content-wrapper-mobile'),
+      $heroHeader: options.$element.find('.hero__header')
     };
 
-    slickTheme.vars = {
+    this.vars = {
       slideClass: 'slick-slide',
       activeClass: 'slick-active',
       slickList: '.slick-list',
@@ -524,24 +522,20 @@ var slickTheme = (function(module, $) {
       pausedClass: 'is-paused',
       activeContentClass: 'is-active',
       pagination: '[data-slide-pagination]',
-      adapt: slickTheme.cache.$hero.data('adapt'),
-      loadSlideA11yString: slickTheme.cache.$hero.data('slide-nav-a11y'),
-      activeSlideA11yString: slickTheme.cache.$hero.data(
+      adapt: this.cache.$hero.data('adapt'),
+      loadSlideA11yString: this.cache.$hero.data('slide-nav-a11y'),
+      activeSlideA11yString: this.cache.$hero.data(
         'slide-nav-active-a11y'
       )
     };
-  };
-
-  init = function(options) {
-    cacheObjects();
 
     // Default settings
-    settings = {
+    this.settings = {
       // User options
       $element: null,
 
       // Private settings
-      isTouch: slickTheme.cache.$html.hasClass('supports-touch') ? true : false,
+      isTouch: this.cache.$html.hasClass('supports-touch') ? true : false,
 
       // Slick options
       arrows: false,
@@ -550,38 +544,42 @@ var slickTheme = (function(module, $) {
     };
 
     // Override defaults with arguments
-    $.extend(settings, options);
+    $.extend(this.settings, options);
 
+    console.log('before $element.slick()', this);
+    console.log('before this.cache.$hero.find(".slick-prev")', this.cache.$hero.find('.slick-prev'));
+    console.log('before this.cache.$hero.find(".slick-next")', this.cache.$hero.find('.slick-next'));
     /*
     * Init slick slider
     *   - Add any additional option changes here
     *   - https://github.com/kenwheeler/slick/#options
     */
-    settings.$element.slick({
-      arrows: settings.arrows,
-      dots: settings.dots,
+    this.settings.$element.slick({
+      arrows: this.settings.arrows,
+      dots: this.settings.dots,
       draggable: false,
       fade: true,
-      slide: '.hero__slide',
+      slide: `${this.settings.$element.selector} .hero__slide`,
       /*eslint-disable shopify/jquery-dollar-sign-reference */
-      prevArrow: $('.slick-prev'),
-      nextArrow: $('.slick-next'),
-      appendDots: $('.hero__dots-wrapper'),
+      prevArrow: this.cache.$hero.find('.slick-prev'),
+      nextArrow: this.cache.$hero.find('.slick-next'),
+      appendDots: this.cache.$hero.find('.hero__dots-wrapper'),
       /*eslint-enable shopify/jquery-dollar-sign-reference */
-      autoplay: slickTheme.cache.$hero.data('autoplay'),
-      autoplaySpeed: slickTheme.cache.$hero.data('autoplayspeed'),
-      speed: settings.speed,
+      autoplay: this.cache.$hero.data('autoplay'),
+      autoplaySpeed: this.cache.$hero.data('autoplayspeed'),
+      speed: this.settings.speed,
       pauseOnHover: false,
-      onInit: this.onInit,
-      onBeforeChange: this.beforeChange,
-      onAfterChange: this.afterChange,
+      onInit: this.onInit(this),
+      onBeforeChange: this.beforeChange(this),
+      onAfterChange: this.afterChange(this),
       customPaging: function(slick, index) {
         var labelString =
           index === 0
-            ? slickTheme.vars.activeSlideA11yString
-            : slickTheme.vars.loadSlideA11yString;
+            ? this.vars.activeSlideA11yString
+            : this.vars.loadSlideA11yString;
+        console.log('customPaging');
         return (
-          '<a href="#Hero" class="hero__dots" aria-label="' +
+          '<a href="#" class="hero__dots" aria-label="' +
           labelString.replace('[slide_number]', index + 1) +
           '" data-slide-number="' +
           index +
@@ -591,149 +589,270 @@ var slickTheme = (function(module, $) {
         );
       }
     });
-  };
 
-  onInit = function(obj) {
-    $slider = obj.$slider;
-    $allSlides = $slider.find('.' + slickTheme.vars.slideClass);
-    $activeSlide = $slider.find('.' + slickTheme.vars.activeClass);
-    $slickDots = $(slickTheme.vars.slickDots);
-    $paginations = slickTheme.cache.$heroDotsWrapper.find(
-      slickTheme.vars.pagination
-    );
-    $mobileDotsContainer = slickTheme.cache.$heroContentWrapperMobile.find(
-      slickTheme.vars.slickDots
-    );
+    console.log('init end this', this);
+  }
 
-    if (!settings.isTouch) {
-      $allSlides.addClass(slickTheme.vars.hiddenClass);
-      $activeSlide.removeClass(slickTheme.vars.hiddenClass);
+  /*============================================================================
+  Initialise the plugin and define global options
+  ==============================================================================*/
+  // cacheObjects(options) {
+  //   this.cache = {
+  //     $html: $('html'),
+  //     $window: $(window),
+  //     $hero: options.$element, // TODO dynamic to the specific slideshow
+  //     $heroImage: options.$element.find('.hero__image'),
+  //     $pauseButton: options.$element.find('.hero__pause'),
+  //     $heroDotsWrapper: options.$element.find('.hero__dots-wrapper'),
+  //     $heroDotsWrapperDesktop: options.$element.find('.hero__dots-wrapper-desktop'),
+  //     $heroContentWrapperMobile: options.$element.find('.hero__content-wrapper-mobile'),
+  //     $heroHeader: options.$element.find('.hero__header')
+  //   };
+
+  //   // console.log('$heroImage', this.cache.$heroImage);
+  //   // console.log('$pauseButton', this.cache.$pauseButton);
+  //   // console.log('$heroHeader', this.cache.$heroHeader);
+  //   // console.log('$heroDotsWrapper', this.cache.$heroDotsWrapper);
+  //   // console.log('$heroDotsWrapperDesktop', this.cache.$heroDotsWrapperDesktop);
+  //   // console.log('$heroContentWrapperMobile', this.cache.$heroContentWrapperMobile);
+
+  //   this.vars = {
+  //     slideClass: 'slick-slide',
+  //     activeClass: 'slick-active',
+  //     slickList: '.slick-list',
+  //     slickDots: '.slick-dots',
+  //     slickActiveMobile: 'slick-active-mobile',
+  //     hiddenClass: 'hero__slide--hidden',
+  //     pausedClass: 'is-paused',
+  //     activeContentClass: 'is-active',
+  //     pagination: '[data-slide-pagination]',
+  //     adapt: this.cache.$hero.data('adapt'),
+  //     loadSlideA11yString: this.cache.$hero.data('slide-nav-a11y'),
+  //     activeSlideA11yString: this.cache.$hero.data(
+  //       'slide-nav-active-a11y'
+  //     )
+  //   };
+  // };
+
+  // init(options) {
+  //   // this.cacheObjects(options);
+
+  //   // Default settings
+  //   this.settings = {
+  //     // User options
+  //     $element: null,
+
+  //     // Private settings
+  //     isTouch: this.cache.$html.hasClass('supports-touch') ? true : false,
+
+  //     // Slick options
+  //     arrows: false,
+  //     dots: true,
+  //     adaptiveHeight: false
+  //   };
+
+  //   // Override defaults with arguments
+  //   $.extend(this.settings, options);
+
+  //   /*
+  //   * Init slick slider
+  //   *   - Add any additional option changes here
+  //   *   - https://github.com/kenwheeler/slick/#options
+  //   */
+  //   this.settings.$element.slick({
+  //     arrows: this.settings.arrows,
+  //     dots: this.settings.dots,
+  //     draggable: false,
+  //     fade: true,
+  //     slide: `${this.settings.$element.selector} .hero__slide`,
+  //     /*eslint-disable shopify/jquery-dollar-sign-reference */
+  //     prevArrow: this.cache.$hero.find('.slick-prev'),
+  //     nextArrow: this.cache.$hero.find('.slick-next'),
+  //     appendDots: this.cache.$hero.find('.hero__dots-wrapper'),
+  //     /*eslint-enable shopify/jquery-dollar-sign-reference */
+  //     autoplay: this.cache.$hero.data('autoplay'),
+  //     autoplaySpeed: this.cache.$hero.data('autoplayspeed'),
+  //     speed: this.settings.speed,
+  //     pauseOnHover: false,
+  //     onInit: this.onInit,
+  //     onBeforeChange: this.beforeChange,
+  //     onAfterChange: this.afterChange,
+  //     customPaging: function(slick, index) {
+  //       var labelString =
+  //         index === 0
+  //           ? this.vars.activeSlideA11yString
+  //           : this.vars.loadSlideA11yString;
+  //       console.log('customPaging');
+  //       return (
+  //         '<a href="#" class="hero__dots" aria-label="' +
+  //         labelString.replace('[slide_number]', index + 1) +
+  //         '" data-slide-number="' +
+  //         index +
+  //         '" data-slide-pagination aria-controls="SlickSlide' +
+  //         (index + 1) +
+  //         '"></a>'
+  //       );
+  //     }
+  //   });
+
+  //   console.log('init settings', settings);
+  //   console.log('init this', this);
+  //   // console.log('prevArrow: ', this.cache.$hero.find('.slick-prev'));
+  //   // console.log('nextArrow: ', this.cache.$hero.find('.slick-next'));
+  //   // console.log('appendDots: ', this.cache.$hero.find('.hero__dots-wrapper'));
+  // }
+
+  onInit(obj) {
+    this.$slider = obj.$slider;
+    this.$allSlides = this.$slider.find('.' + this.vars.slideClass);
+    this.$activeSlide = this.$slider.find('.' + this.vars.activeClass);
+    this.$slickDots = this.$slider.find(this.vars.slickDots);
+    this.$paginations = this.cache.$heroDotsWrapper.find(
+      this.vars.pagination
+    );
+    this.$mobileDotsContainer = this.cache.$heroContentWrapperMobile.find(
+      this.vars.slickDots
+    );
+    console.log('slider onInit obj', obj);
+    // console.log('slider onInit $slider', $slider);
+    // console.log('this.vars.slickDots', this.vars.slickDots);
+    // console.log('this.$slickDots', this.$slickDots);
+    // console.log('this.$paginations', this.$paginations);
+    // console.log('this.$mobileDotsContainer', this.$mobileDotsContainer);
+
+    if (!this.settings.isTouch) {
+      this.$allSlides.addClass(this.vars.hiddenClass);
+      this.$activeSlide.removeClass(this.vars.hiddenClass);
     }
 
-    if (slickTheme.vars.adapt) {
-      adaptHeight();
-      showActiveContent(0);
+    if (this.vars.adapt) {
+      this.adaptHeight();
+      this.showActiveContent(0);
     } else {
-      setFullScreen();
+      this.setFullScreen();
     }
 
-    if (slickTheme.cache.$html.hasClass('supports-csstransforms3d')) {
-      setParallax();
+    if (this.cache.$html.hasClass('supports-csstransforms3d')) {
+      this.setParallax();
     }
 
     //trigger event that slick has initialized
-    slickTheme.cache.$window.trigger('slick-initialized');
+    this.cache.$window.trigger('slick-initialized');
 
-    if (settings.autoplay) {
-      slickTheme.cache.$pauseButton.on('click', togglePause);
+    if (this.settings.autoplay) {
+      this.cache.$pauseButton.on('click', togglePause);
     }
 
-    slideshowA11ySetup();
-  };
+    this.slideshowA11ySetup();
+  }
 
-  beforeChange = function(evt, currentSlide, nextSlide) {
-    if (!settings.isTouch) {
-      $allSlides.removeClass(slickTheme.vars.hiddenClass);
+  beforeChange(evt, currentSlide, nextSlide) {
+    console.log('beforeChange', evt);
+    console.log('this.$slider beforeChange', this.$slider);
+    console.log('slider beforeChange currentSlide', currentSlide);
+    console.log('slider beforeChange nextSlide', nextSlide);
+    if (!this.settings.isTouch) {
+      this.$allSlides.removeClass(this.vars.hiddenClass);
     }
 
     // Set upcoming slide as index
-    currentActiveSlide = nextSlide;
+    this.currentActiveSlide = nextSlide;
 
     // Set new active slide to proper parallax position
-    if (slickTheme.cache.$html.hasClass('supports-csstransforms3d')) {
-      calculateParallax(currentActiveSlide);
+    if (this.cache.$html.hasClass('supports-csstransforms3d')) {
+      this.calculateParallax(this.currentActiveSlide);
     }
 
-    var $desktopPagination = slickTheme.cache.$heroDotsWrapperDesktop.find(
-      slickTheme.vars.pagination
+    var $desktopPagination = this.cache.$heroDotsWrapperDesktop.find(
+      this.vars.pagination
     );
 
-    var $mobilePagination = slickTheme.cache.$heroContentWrapperMobile.find(
-      slickTheme.vars.pagination
+    var $mobilePagination = this.cache.$heroContentWrapperMobile.find(
+      this.vars.pagination
     );
 
     // initialize both $desktopPagination and $mobilePagination
     // at the same time
     $desktopPagination.each(function(index) {
       var currentElem = this;
-      setPaginationAttributes(currentElem, index, nextSlide);
+      this.setPaginationAttributes(currentElem, index, nextSlide);
     });
 
     $mobilePagination.each(function(index) {
       var currentElem = this;
-      setPaginationAttributes(currentElem, index, nextSlide);
+      this.setPaginationAttributes(currentElem, index, nextSlide);
     });
 
-    $paginations
+    this.$paginations
       .removeAttr('aria-current', 'true')
       .eq(nextSlide)
       .attr('aria-current', 'true');
 
-    if (!slickTheme.vars.adapt || !$mobileDotsContainer.length) {
+    if (!this.vars.adapt || !this.$mobileDotsContainer.length) {
       return;
     }
 
-    var $mobileDotsList = $mobileDotsContainer.find('li');
+    var $mobileDotsList = this.$mobileDotsContainer.find('li');
 
-    showActiveContent(nextSlide);
+    this.showActiveContent(nextSlide);
 
     // toggle active class on mobile dots
     $mobileDotsList
       .removeAttr('aria-hidden')
-      .removeClass(slickTheme.vars.slickActiveMobile)
+      .removeClass(this.vars.slickActiveMobile)
       .eq(nextSlide)
-      .addClass(slickTheme.vars.slickActiveMobile)
+      .addClass(this.vars.slickActiveMobile)
       .attr('aria-hidden', false);
-  };
+  }
 
-  afterChange = function() {
-    var $dotsList = $slickDots.find('li');
-    var $activeDot = $slickDots.find('.' + slickTheme.vars.activeClass);
+  afterChange() {
+    var $dotsList = this.$slickDots.find('li');
+    var $activeDot = this.$slickDots.find('.' + this.vars.activeClass);
 
     $dotsList.removeAttr('aria-hidden');
     $activeDot.attr('aria-hidden', false);
 
-    if (settings.isTouch) return;
+    if (this.settings.isTouch) return;
 
-    $activeSlide = $slider.find('.' + slickTheme.vars.activeClass);
-    $allSlides.addClass(slickTheme.vars.hiddenClass).attr('aria-hidden', true);
-    $activeSlide
-      .removeClass(slickTheme.vars.hiddenClass)
+    this.$activeSlide = this.$slider.find('.' + this.vars.activeClass);
+    this.$allSlides.addClass(this.vars.hiddenClass).attr('aria-hidden', true);
+    this.$activeSlide
+      .removeClass(this.vars.hiddenClass)
       .attr('aria-hidden', false);
-  };
+  }
 
-  setPaginationAttributes = function(currentElem, index, nextSlide) {
+  setPaginationAttributes(currentElem, index, nextSlide) {
     var labelString =
       index === nextSlide
-        ? slickTheme.vars.activeSlideA11yString
-        : slickTheme.vars.loadSlideA11yString;
+        ? this.vars.activeSlideA11yString
+        : this.vars.loadSlideA11yString;
 
     labelString = labelString.replace('[slide_number]', index + 1);
     $(currentElem).attr('aria-label', labelString);
-  };
+  }
 
-  adaptHeight = function() {
+  adaptHeight() {
     // Set class on action bar
-    slickTheme.cache.$heroHeader.addClass('hero__header--adapt');
+    this.cache.$heroHeader.addClass('hero__header--adapt');
 
     // set custom dot class for adapt height on mobile
-    if (!$mobileDotsContainer.length) {
+    if (!this.$mobileDotsContainer.length) {
       return;
     }
 
-    var $initialActiveDot = $mobileDotsContainer.find('li:first-of-type');
-    $initialActiveDot.addClass(slickTheme.vars.slickActiveMobile);
-  };
+    var $initialActiveDot = this.$mobileDotsContainer.find('li:first-of-type');
+    $initialActiveDot.addClass(this.vars.slickActiveMobile);
+  }
 
-  setFullScreen = function() {
-    sizeFullScreen();
+  setFullScreen() {
+    this.sizeFullScreen();
 
     // Resize hero after screen resize
-    slickTheme.cache.$window.on('resize', $.debounce(250, sizeFullScreen));
-  };
+    this.cache.$window.on('resize', $.debounce(250, this.sizeFullScreen));
+  }
 
-  showActiveContent = function(slideIndex) {
-    if ($allSlides.length <= 1) return;
+  showActiveContent(slideIndex) {
+    if (this.$allSlides.length <= 1) return;
 
     var $contentMobile = $('.hero__content-mobile');
 
@@ -745,25 +864,25 @@ var slickTheme = (function(module, $) {
       '[data-index="' + (slideIndex + 1) + '"]'
     );
 
-    $contentMobile.removeClass(slickTheme.vars.activeContentClass);
-    $currentContentMobile.addClass(slickTheme.vars.activeContentClass);
-  };
+    $contentMobile.removeClass(this.vars.activeContentClass);
+    $currentContentMobile.addClass(this.vars.activeContentClass);
+  }
 
-  keyboardNavigation = function(evt) {
+  keyboardNavigation(evt) {
     if (evt.keyCode === 37) {
-      settings.$element.slickPrev();
+      this.settings.$element.slickPrev();
     }
     if (evt.keyCode === 39) {
-      settings.$element.slickNext();
+      this.settings.$element.slickNext();
     }
-  };
+  }
 
-  togglePause = function() {
+  togglePause() {
     var $pauseButton = $(this);
-    var isPaused = $pauseButton.hasClass(slickTheme.vars.pausedClass);
+    var isPaused = $pauseButton.hasClass(this.vars.pausedClass);
 
     $pauseButton
-      .toggleClass(slickTheme.vars.pausedClass, !isPaused)
+      .toggleClass(this.vars.pausedClass, !isPaused)
       .attr(
         'aria-label',
         isPaused
@@ -771,125 +890,127 @@ var slickTheme = (function(module, $) {
           : $pauseButton.data('label-play')
       );
 
-    if (settings.autoplay) {
+    if (this.settings.autoplay) {
       if (isPaused) {
-        settings.$element.slickPlay();
+        this.settings.$element.slickPlay();
       } else {
-        settings.$element.slickPause();
+        this.settings.$element.slickPause();
       }
     }
-  };
+  }
 
-  sizeFullScreen = function() {
+  sizeFullScreen() {
     if (theme.cache.$announcementBar.length) {
-      windowHeight =
-        slickTheme.cache.$window.height() -
+      this.windowHeight =
+        this.cache.$window.height() -
         theme.cache.$announcementBar.height();
     } else {
-      windowHeight = slickTheme.cache.$window.height();
+      this.windowHeight = this.cache.$window.height();
     }
 
-    settings.$element.css('height', windowHeight);
-  };
+    this.settings.$element.css('height', this.windowHeight);
+  }
 
-  setParallax = function() {
-    prefixedTransform = vendorPrefix ? vendorPrefix('transform') : 'transform';
+  setParallax() {
+    let self = this;
+    this.prefixedTransform = vendorPrefix ? vendorPrefix('transform') : 'transform';
 
-    slickTheme.cache.$window.on('scroll', function() {
-      calculateParallax(currentActiveSlide);
+    this.cache.$window.on('scroll', function() {
+      self.calculateParallax(self.currentActiveSlide);
     });
-  };
+  }
 
-  calculateParallax = function(currentSlide) {
-    scrolled = slickTheme.cache.$window.scrollTop();
+  calculateParallax(currentSlide) {
+    this.scrolled = this.cache.$window.scrollTop();
 
-    if (slickTheme.cache.$heroImage[currentSlide]) {
-      slickTheme.cache.$heroImage[currentSlide].style[prefixedTransform] =
-        'translate3d(0, ' + scrolled / 4.5 + 'px, 0)';
+    if (this.cache.$heroImage[currentSlide]) {
+      this.cache.$heroImage[currentSlide].style[this.prefixedTransform] =
+        'translate3d(0, ' + this.scrolled / 4.5 + 'px, 0)';
     }
 
     if (theme.cache.$announcementBar.length) {
       $(theme.cache.$announcementBar).css({
-        transform: 'translate3d(0, ' + scrolled / 4.5 + 'px, 0)'
+        transform: 'translate3d(0, ' + this.scrolled / 4.5 + 'px, 0)'
       });
     }
-  };
+  }
 
-  slideshowA11ySetup = function() {
-    var $list = slickTheme.cache.$hero.find(slickTheme.vars.slickList);
-    var $dotsList = $slickDots.find('li');
-    var $activeDot = $slickDots.find('.' + slickTheme.vars.activeClass);
-    var $mobileActiveDot = $slickDots.find(
-      '.' + slickTheme.vars.slickActiveMobile
+  slideshowA11ySetup() {
+    var $list = this.cache.$hero.find(this.vars.slickList);
+    var $dotsList = this.$slickDots.find('li');
+    var $activeDot = this.$slickDots.find('.' + this.vars.activeClass);
+    var $mobileActiveDot = this.$slickDots.find(
+      '.' + this.vars.slickActiveMobile
     );
+    var self = this;
     // When an element in the slider is focused
     // pause slideshow and set active slide aria-live.
-    slickTheme.cache.$hero
+    this.cache.$hero
       .on('focusin', function(evt) {
         if (
-          !slickTheme.cache.$hero.has(evt.target).length ||
+          !self.cache.$hero.has(evt.target).length ||
           $list.attr('aria-live') === 'polite'
         ) {
           return;
         }
 
         $list.attr('aria-live', 'polite');
-        if (settings.autoplay) {
-          settings.$element.slickPause();
+        if (self.settings.autoplay) {
+          self.settings.$element.slickPause();
         }
       })
       .on('focusout', function(evt) {
-        if (slickTheme.cache.$hero.has(evt.relatedTarget).length) {
+        if (self.cache.$hero.has(evt.relatedTarget).length) {
           return;
         }
 
         $list.removeAttr('aria-live');
-        if (settings.autoplay) {
+        if (self.settings.autoplay) {
           // Only resume playing if the user hasn't paused using the pause
           // button
           if (
-            !slickTheme.cache.$pauseButton.hasClass(slickTheme.vars.pausedClass)
+            !self.cache.$pauseButton.hasClass(self.vars.pausedClass)
           ) {
-            settings.$element.slickPlay();
+            self.settings.$element.slickPlay();
           }
         }
       })
-      .on('keyup', keyboardNavigation.bind(this));
+      .on('keyup', this.keyboardNavigation.bind(this));
 
     $list.removeAttr('tabindex');
     $dotsList.removeAttr('aria-hidden');
     $activeDot.attr('aria-hidden', false);
     $mobileActiveDot.attr('aria-hidden', false);
 
-    if ($allSlides.length > 1) {
-      $paginations
+    if (this.$allSlides.length > 1) {
+      this.$paginations
         .each(function() {
           $(this).on('click keyup', function(evt) {
             if (evt.type === 'keyup' && evt.which !== 13) return;
 
             evt.preventDefault();
 
-            slickTheme.cache.$hero.attr('tabindex', -1);
+            self.cache.$hero.attr('tabindex', -1);
 
             if (evt.type === 'keyup') {
-              slickTheme.cache.$hero.focus();
+              self.cache.$hero.focus();
             }
           });
         })
         .eq(0)
         .attr('aria-current', 'true');
     }
-  };
+  }
 
-  module = {
-    init: init,
-    onInit: onInit,
-    beforeChange: beforeChange,
-    afterChange: afterChange
-  };
+  // module = {
+  //   init: init,
+  //   onInit: onInit,
+  //   beforeChange: beforeChange,
+  //   afterChange: afterChange
+  // };
 
-  return module;
-})(slickTheme || {}, jQuery);
+  // return module;
+};
 
 /*============================================================================
   Drawer modules
@@ -2114,26 +2235,35 @@ var ajaxCart = (function(module, $) {
 /*================ SECTIONS ================*/
 theme.SlideshowSection = (function() {
   function SlideshowSection(container) {
-    console.log('SlideshowSection', container);
-    var $container = (this.$container = $(container));
-    var slideshow = (this.slideshow = '#Hero');
+    var $container = (this.$container = $(container)),
+        id = $container.attr('data-section-id');
+    var slideshow = (this.slideshow = `.slideshow-section--${id}`);
     var $slideshowImages = $container.find('.hero__image');
     //eslint-disable-next-line no-unused-vars
     var autoplay = (this.autoplay = $(this.slideshow).data('autoplay'));
 
-    slickTheme.init({
+    // SLICK THEME INIT HERE
+    // console.log('theme.SlideshowSection $container', $container);
+    let slickInit = new SlickTheme({
       $element: $(slideshow),
       autoplay: $(slideshow).data('autoplay'),
       autoplaySpeed: $(slideshow).data('autoplayspeed'),
       arrows: true
     });
+    console.log('slickInit', slickInit);
+    // slickInit.init({
+    //   $element: $(slideshow),
+    //   autoplay: $(slideshow).data('autoplay'),
+    //   autoplaySpeed: $(slideshow).data('autoplayspeed'),
+    //   arrows: true
+    // });
 
     if ($('html').hasClass('is-ios') && Shopify.designMode) {
       $(slideshow).addClass('is-ios-editor');
     }
 
     $slideshowImages.imagesLoaded({ background: true }).progress(function() {
-      $('.hero__image').addClass('image-loaded');
+      $container.find('.hero__image').addClass('image-loaded');
     });
 
     theme.drawersInit();
@@ -3220,7 +3350,6 @@ theme.HeaderSection.prototype = _.assignIn({}, theme.HeaderSection.prototype, {
 
 theme.ActionBarSection = (function() {
   function ActionBarSection() {
-    console.log('ActionBarSection');
     theme.ActionBar.init();
   }
 
@@ -3831,7 +3960,7 @@ theme.cacheSelectors = function () {
 
     // Hero
     $heroContentWrapper: $('.hero__content-wrapper'),
-    $hero: $('#Hero'),
+    $hero: $('#Hero'), // this references the top Hero
     $heroImages: $('.hero__image'),
 
     // Cart classes

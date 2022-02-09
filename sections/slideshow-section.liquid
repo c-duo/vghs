@@ -76,7 +76,7 @@
   {%- if section.settings.hero_home_height == 'adapt' -%}
     class="hero--adapt"
   {%- endif -%}>
-  <div class="hero slideshow-{{ section.id }} sub-hero"
+  <div class="hero slideshow-{{ section.id }}"
         role="region"
         aria-label="slideshow"
         aria-describedby="slideshow-info"
@@ -93,7 +93,18 @@
             {% capture current %}{% cycle 1, 2 %}{% endcapture %}
             {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'icon icon--placeholder' }}
           {%- else -%}
-            {% assign img_url = block.settings.hero_slide | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            {% assign video_url = block.settings.hero_slide %}
+            <div class="hero__image hero__image--{{ block.id }} page-width" data-image="{{ block.id }}" data-section-id="{{ block.id }}" data-section-type="featured-video-section">
+              {% if video_url.type == "youtube" %}
+                <iframe src="//www.youtube.com/embed/{{ video_url.id }}?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+              {% endif %}
+  
+              {% if video_url.type == "vimeo" %}
+                <iframe src="//player.vimeo.com/video/{{ video_url.id }}?byline=0&portrait=0&badge=0" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+  
+              {% endif %}
+            </div>
+            {%- comment %}
             <img class="hero__image hero__image--{{ block.id }} lazyload{% unless forloop.first == true %} lazypreload{% endunless %}"
               {%- if forloop.first == true -%}
                 src="{{ block.settings.hero_slide | img_url: '300x' }}"
@@ -110,7 +121,9 @@
                 <div class="hero__image-no-js hero__image--{{ block.id }}" data-image="{{ block.id }}" style="background-image: url('{{ block.settings.hero_slide | img_url: "2048x2048" }}');"></div>
               </noscript>
             {%- endif -%}
+            {%- endcomment %}
           {%- endif -%}
+          {%- comment %}
           <div class="hero__content-wrapper">
             <div class="hero__content">
               <div class="hero__content-centered">
@@ -127,6 +140,7 @@
               </div>
             </div>
           </div>
+          {%- endcomment %}
         </div>
       {%- endfor -%}
     {%- else -%}
@@ -215,7 +229,7 @@
     "cs": "Prezentace",
     "da": "Diasshow",
     "de": "Slideshow",
-    "en": "Slideshow",
+    "en": "Slideshow Gallery",
     "es": "Diapositivas",
     "fi": "Diaesitys",
     "fr": "Diaporama",
@@ -588,31 +602,35 @@
       },
       "settings": [
         {
-          "type": "image_picker",
+          "type": "video_url",
           "id": "hero_slide",
           "label": {
-            "cs": "Obrázek",
-            "da": "Billede",
-            "de": "Foto",
-            "en": "Image",
-            "es": "Imagen",
-            "fi": "Kuva",
-            "fr": "Image",
-            "it": "Immagine",
-            "ja": "画像",
-            "ko": "이미지",
-            "nb": "Bilde",
-            "nl": "Afbeelding",
-            "pl": "Obraz",
-            "pt-BR": "Imagem",
-            "pt-PT": "Imagem",
-            "sv": "Bild",
-            "th": "รูปภาพ",
-            "tr": "Görsel",
-            "vi": "Hình ảnh",
-            "zh-CN": "图片",
-            "zh-TW": "圖片"
-          }
+            "cs": "Odkaz na video",
+            "da": "Videolink",
+            "de": "Videolink",
+            "en": "Video link",
+            "es": "Enlace de video",
+            "fi": "Videolinkki",
+            "fr": "Lien de la vidéo",
+            "it": "Link video",
+            "ja": "ビデオリンク",
+            "ko": "동영상 링크",
+            "nb": "Videokobling",
+            "nl": "Videolink",
+            "pl": "Link filmu",
+            "pt-BR": "Link do vídeo",
+            "pt-PT": "Ligação do vídeo",
+            "sv": "Videolänk",
+            "th": "ลิงก์วิดีโอ",
+            "tr": "Video bağlantısı",
+            "vi": "Liên kết video",
+            "zh-CN": "视频链接",
+            "zh-TW": "影片連結"
+          },
+          "accept": [
+            "youtube",
+            "vimeo"
+          ]
         },
         {
           "type": "select",
@@ -991,7 +1009,7 @@
         "cs": "Prezentace",
         "da": "Diasshow",
         "de": "Slideshow",
-        "en": "Slideshow",
+        "en": "Slideshow Gallery",
         "es": "Diapositivas",
         "fi": "Diaesitys",
         "fr": "Diaporama",
