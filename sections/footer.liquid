@@ -93,6 +93,19 @@
             </a>
           </li>
         {% endif %}
+        {%- comment %} Manually added social links {%- endcomment %}
+        <li>
+          <a href="#" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Discord' }}">
+            <img class="icon-img" src="https://cdn.shopify.com/s/files/1/0617/5119/7940/files/Social_DIS.png?v=1644444751" />
+            <span class="visually-hidden">Discord</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'TikTok' }}">
+            <img class="icon-img" src="https://cdn.shopify.com/s/files/1/0617/5119/7940/files/Social_TT.png?v=1644444751" />
+            <span class="visually-hidden">TikTok</span>
+          </a>
+        </li>
       </ul>
     </div>
     <div class="grid__item large-up--one-half">
