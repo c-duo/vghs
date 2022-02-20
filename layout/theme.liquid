@@ -114,9 +114,7 @@
         {% endcomment %}
 
         <div class="action-area">
-          {%- unless request.page_type == 'product' or request.page_type == 'search' -%}
-            {% include 'action-bar' %}
-          {%- endunless -%}
+          {% include 'action-bar' %}
 
           {%- if request.page_type == 'search' and search.performed -%}
             <div class="action-bar">
