@@ -2,10 +2,10 @@
   "current": {
     "color_body_bg": "#202443",
     "color_body_headings": "#ffffff",
-    "color_body_text": "#ffffff",
+    "color_body_text": "#0c40a6",
     "color_body_links": "#fed20b",
     "color_button_bg": "#004b9d",
-    "color_button_text": "#fff",
+    "color_button_text": "#ffffff",
     "color_sale_badge": "#fed20b",
     "color_borders": "#eceff1",
     "color_nav_bg": "#202443",
@@ -343,6 +343,15 @@
           "show_product_recommendations": true,
           "heading": "You may also like",
           "vendor_enable": false
+        }
+      },
+      "list-collections-template": {
+        "type": "list-collections-template",
+        "settings": {
+          "display_type": "all",
+          "sort": "alphabetical",
+          "collection_image_type": "portrait",
+          "collection_image_size": "medium"
         }
       }
     },
