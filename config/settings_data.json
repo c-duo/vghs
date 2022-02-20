@@ -173,7 +173,7 @@
         "settings": {
           "product_image_type": "portrait",
           "product_image_size": "medium",
-          "product_image_spacing": false,
+          "product_image_spacing": true,
           "vendor_enable": false
         }
       },
