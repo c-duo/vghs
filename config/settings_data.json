@@ -30,8 +30,8 @@
     "social_instagram_link": "#",
     "social_youtube_link": "#",
     "share_facebook": true,
-    "share_twitter": true,
-    "share_pinterest": true,
+    "share_twitter": false,
+    "share_pinterest": false,
     "favicon": "shopify:\/\/shop_images\/VGHS_V-logo.png",
     "checkout_logo_position": "left",
     "checkout_logo_size": "medium",
@@ -148,14 +148,25 @@
       "collection-template": {
         "type": "collection-template",
         "settings": {
-          "product_image_type": "landscape",
-          "product_image_size": "large",
-          "product_image_spacing": true
+          "product_image_type": "portrait",
+          "product_image_size": "medium",
+          "product_image_spacing": true,
+          "vendor_enable": false,
+          "collection_sort_enable": true,
+          "collection_tags_enable": false,
+          "pagination_type": "numbers"
         }
       },
       "product-template": {
         "type": "product-template",
         "settings": {
+          "skip_first_product_image": false,
+          "product_image_type": "portrait",
+          "show_vendor": false,
+          "show_quantity_selector": false,
+          "social_sharing_products": true,
+          "enable_payment_button": true,
+          "product_form_width": "small"
         }
       },
       "16422948863b39dfee": {
@@ -324,6 +335,14 @@
           "image": "shopify:\/\/shop_images\/Screen_Shot_2014-03-10_at_2.40.jpg",
           "button_label": "",
           "button_link": ""
+        }
+      },
+      "product-recommendations": {
+        "type": "product-recommendations",
+        "settings": {
+          "show_product_recommendations": true,
+          "heading": "You may also like",
+          "vendor_enable": false
         }
       }
     },
