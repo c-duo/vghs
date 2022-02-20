@@ -2,7 +2,7 @@
   "current": {
     "color_body_bg": "#202443",
     "color_body_headings": "#ffffff",
-    "color_body_text": "#0c40a6",
+    "color_body_text": "#ffffff",
     "color_body_links": "#fed20b",
     "color_button_bg": "#004b9d",
     "color_button_text": "#ffffff",
@@ -352,6 +352,11 @@
           "sort": "alphabetical",
           "collection_image_type": "portrait",
           "collection_image_size": "medium"
+        }
+      },
+      "cart-template": {
+        "type": "cart-template",
+        "settings": {
         }
       }
     },
