@@ -28,8 +28,8 @@
   {% endif %}
 </style>
 
-<div id="featured-slider-{{ section.id }}" class="featured-slider-section" data-section-id="{{ section.id }}" data-section-type="featured-slider-section">
-  <!-- <div class="featured-slider__cover">
+<!-- <div id="featured-slider-{{ section.id }}" class="featured-slider-section" data-section-id="{{ section.id }}" data-section-type="featured-slider-section">
+  <div class="featured-slider__cover">
     <div class="featured-slider__cover-background featured-slider__cover-background--top reveal-slider__cover-background--top side-scroller__cover-background">
       {% if section.settings.cover_image == blank %}
         {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -63,10 +63,17 @@
   <div class="featured-slider__slides-container side-scroller__slides-container slider" tabindex="-1">
 
     <div class=".featured-slider__cover featured-slider__cover-background-image lazyload" data-bgset="{% include 'bgset', image: section.settings.cover_image %}"></div>
-    <button class="btn btn--clear featured-slider__close reveal-slider__close">
+    <div class="featured-slider__cover-content reveal-slider__cover-content side-scroller__cover-content{% if section.settings.cover_title_desktop_position == 'left' %} featured-slider__cover-content--left{% endif %}">
+      <h2 class="featured-slider__cover-title h3"{% if section.settings.show_overlay %} style="color: {{ section.settings.overlay_text }}; border-color: {{ section.settings.overlay_text }};"{% endif %} data-animate>{{ section.settings.cover_title }}</h2>
+      <!-- <div class="pinch-indicators">
+        <div class="pinch-indicator pinch-indicator--top"></div>
+        <div class="pinch-indicator pinch-indicator--bottom"></div>
+      </div> -->
+    </div>
+    <!-- <button class="btn btn--clear featured-slider__close reveal-slider__close">
       <span class="featured-slider__close-icon">{% include 'icon-close' %}</span>
       <span class="featured-slider__close-circle" style="border-color: {{ section.settings.text_color }}"></span>
-    </button>
+    </button> -->
 
     <div class="featured-slider__slide-list">
       {% for block in section.blocks %}
