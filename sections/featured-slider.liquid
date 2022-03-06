@@ -40,7 +40,7 @@
         </noscript>
       {% endif %}
     </div>
-    <!-- <div class="featured-slider__cover-background featured-slider__cover-background--bottom reveal-slider__cover-background--bottom">
+    <div class="featured-slider__cover-background featured-slider__cover-background--bottom reveal-slider__cover-background--bottom">
       {% if section.settings.cover_image == blank %}
         {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
       {% else %}
@@ -49,7 +49,7 @@
           <div class="featured-slider__cover-background-image lazyload" style="background-image: {{ section.settings.cover_image | img_url: 'master' }}"></div>
         </noscript>
       {% endif %}
-    </div> -->
+    </div>
 
     <div class="featured-slider__cover-content reveal-slider__cover-content side-scroller__cover-content{% if section.settings.cover_title_desktop_position == 'left' %} featured-slider__cover-content--left{% endif %}">
       <h2 class="featured-slider__cover-title h3"{% if section.settings.show_overlay %} style="color: {{ section.settings.overlay_text }}; border-color: {{ section.settings.overlay_text }};"{% endif %} data-animate>{{ section.settings.cover_title }}</h2>
