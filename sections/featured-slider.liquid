@@ -66,13 +66,13 @@
     <div class="featured-slider__cover-content reveal-slider__cover-content side-scroller__cover-content{% if section.settings.cover_title_desktop_position == 'left' %} featured-slider__cover-content--left{% endif %}">
       <h2 class="featured-slider__cover-title h3"{% if section.settings.show_overlay %} style="color: {{ section.settings.overlay_text }}; border-color: {{ section.settings.overlay_text }};"{% endif %} data-animate>{{ section.settings.cover_title }}</h2>
 
-      {% assign img_url = block.settings.cover_banner_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+      {% assign img_url = section.settings.cover_banner_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
       <img class="lazyload"
         data-src="{{ img_url }}"
         data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
-        data-aspectratio="{{ block.settings.cover_banner_image.aspect_ratio }}"
+        data-aspectratio="{{ section.settings.cover_banner_image.aspect_ratio }}"
         data-sizes="auto"
-        alt="{{ block.settings.cover_banner_image.alt | escape }}">
+        alt="{{ section.settings.cover_banner_image.alt | escape }}">
       <!-- <div class="pinch-indicators">
         <div class="pinch-indicator pinch-indicator--top"></div>
         <div class="pinch-indicator pinch-indicator--bottom"></div>
