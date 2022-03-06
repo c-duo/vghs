@@ -1405,12 +1405,12 @@ theme.FeaturedSlider = (function() {
     const $this = $('.featured-slider__cover-content'),
         $parent = $('.featured-slider__slides-container'),
         $window = $(window);
-      let pos = ($parent.height() - ($this.height() * 2.25));
 
     $window.scroll(function (e) {
         // console.log('$window.scrollTop', $window.scrollTop());
         // console.log('pos', pos);
-        if ($window.scrollTop() > pos) {
+        const position = ($parent.height() - ($this.height() * 2.25));
+        if ($window.scrollTop() > position) {
           $this.removeClass('sticky');
         } else {
           $this.addClass('sticky');
