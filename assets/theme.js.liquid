@@ -1411,7 +1411,7 @@ theme.FeaturedSlider = (function() {
     $window.scroll(function (e) {
         // console.log('$window.scrollTop', $window.scrollTop());
         // console.log('pos', pos);
-        if ($window.scrollTop() > ($parent.height() - ($this.height() * 4))) {
+        if ($window.scrollTop() > ($parent.height() - ($this.height() * 2.25))) {
           $this.removeClass('sticky');
         } else {
           $this.addClass('sticky');
