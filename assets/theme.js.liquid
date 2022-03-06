@@ -1406,7 +1406,7 @@ theme.FeaturedSlider = (function() {
     const $this = $('.featured-slider__cover-content'),
         $parent = $('.featured-slider__slides-container'),
         $window = $(window);
-    let pos = $parent.height() - ($this.height() * 2);
+    let pos = $parent.height() - ($this.height() * 3);
 
     $window.scroll(function (e) {
         if ($window.scrollTop() > pos) {
