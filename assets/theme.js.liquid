@@ -1410,15 +1410,17 @@ theme.FeaturedSlider = (function() {
 
     $window.scroll(function (e) {
         if ($window.scrollTop() > pos) {
-            $this.css({
-                position: 'absolute',
-                top: pos
-            });
+            // $this.css({
+            //     position: 'absolute',
+            //     top: pos
+            // });
+            $this.removeClass('sticky');
         } else {
-            $this.css({
-                position: 'fixed',
-                top: 0
-            });
+            // $this.css({
+            //     position: 'fixed',
+            //     top: 0
+            // });
+            $this.addClass('sticky');
         }
     });
 };
