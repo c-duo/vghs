@@ -1406,21 +1406,13 @@ theme.FeaturedSlider = (function() {
     const $this = $('.featured-slider__cover-content'),
         $parent = $('.featured-slider__slides-container'),
         $window = $(window);
-    let pos = $parent.height() - $this.height();
+    let pos = $parent.height();
 
     $window.scroll(function (e) {
         if ($window.scrollTop() > pos) {
-            // $this.css({
-            //     position: 'absolute',
-            //     top: pos
-            // });
-            $this.removeClass('sticky');
+          $this.removeClass('sticky');
         } else {
-            // $this.css({
-            //     position: 'fixed',
-            //     top: 0
-            // });
-            $this.addClass('sticky');
+          $this.addClass('sticky');
         }
     });
 };
