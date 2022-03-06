@@ -1403,10 +1403,10 @@ theme.FeaturedSlider = (function() {
   
   function _stickyObject() {
     console.log('_stickyObject');
-    var $this = $('.featured-slider__cover-content'),
+    const $this = $('.featured-slider__cover-content'),
         $parent = $('.featured-slider__slides-container'),
-        $window = $(window),
-        pos = $parent.height() - $this.height();
+        $window = $(window);
+    let pos = $parent.height() - $this.height();
 
     $window.scroll(function (e) {
         if ($window.scrollTop() > pos) {
