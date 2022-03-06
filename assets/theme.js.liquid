@@ -1396,7 +1396,7 @@ theme.FeaturedSlider = (function() {
 //     _toggleViewState();
 
 //     theme.cache.$window.on('resize', $.debounce(_toggleViewState.bind(this)));
-    this.window().on('scroll', _stickyFeaturedBanner(this));
+    window().on('scroll', _stickyFeaturedBanner(this));
   }
   
   function _stickyFeaturedBanner() {
