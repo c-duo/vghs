@@ -1397,12 +1397,30 @@ theme.FeaturedSlider = (function() {
 
 //     theme.cache.$window.on('resize', $.debounce(_toggleViewState.bind(this)));
       // window.onscroll = function() {_stickyFeaturedBanner(this)};
-      theme.cache.$window.on('scroll', _stickyFeaturedBanner(this));
+      // theme.cache.$window.on('scroll', _stickyFeaturedBanner(this));
+
   }
   
-  function _stickyFeaturedBanner() {
-    console.log('_stickyFeaturedBanner', this);
-  }
+  function _stickyObject() {
+    var $this = $('.featured-slider__cover-content'),
+        $parent = $('.featured-slider__slides-container'),
+        $window = $(window),
+        pos = $parent.height() - $this.height();
+
+    $window.scroll(function (e) {
+        if ($window.scrollTop() > pos) {
+            $this.css({
+                position: 'absolute',
+                top: pos
+            });
+        } else {
+            $this.css({
+                position: 'fixed',
+                top: 0
+            });
+        }
+    });
+};
 
   function _toggleViewState() {
     console.log('toggleViewState');
