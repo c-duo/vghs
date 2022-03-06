@@ -5757,6 +5757,9 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 }
 
 /*================ Cover ================*/
+.featured-slider__cover {
+  z-index: 5;
+}
 .featured-slider__cover-background {
   position: absolute;
   left: 0;
@@ -5868,6 +5871,7 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
     }
   }
 }
+
 
 .featured-slider__cover-content {
   position: absolute;
@@ -6060,6 +6064,7 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 /*================ Slides ================*/
 .featured-slider__slides-container {
   transition: background-color 1s ease-out;
+  z-index: 10;
 
   @include media-query($small) {
     height: 100vh;
@@ -6074,6 +6079,8 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 }
 
 .featured-slider__slide-list {
+  position: relative;
+  z-index: 10;
   @include media-query($medium-up) {
     padding: 20vh 0;
   }
