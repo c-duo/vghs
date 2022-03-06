@@ -1396,9 +1396,13 @@ theme.FeaturedSlider = (function() {
 //     _toggleViewState();
 
 //     theme.cache.$window.on('resize', $.debounce(_toggleViewState.bind(this)));
+    this.window().on('scroll', this._stickyFeaturedBanner.bind(this));
   }
   
-  
+  function _stickyFeaturedBanner() {
+    console.log('_stickyFeaturedBanner', this);
+  }
+
   function _toggleViewState() {
     console.log('toggleViewState');
     var windowWidth = $(window).innerWidth();
