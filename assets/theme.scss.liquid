@@ -5872,13 +5872,12 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   }
 }
 
-
 .featured-slider__cover-content {
   position: absolute;
   top: 50vh;
   left: 50%;
   width: 33%;
-  opacity: 1;
+  opacity: 0;
   transition: opacity 0.25s ease-out;
   z-index: $z-index-base;
   text-align: center;
@@ -5886,7 +5885,7 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   &.sticky {
     position: fixed;
   }
-  
+
   @include transform(translate(-50%, -50%));
 
   @include media-query($medium-up) {
