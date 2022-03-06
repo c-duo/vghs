@@ -281,7 +281,8 @@
           "cover_image": "shopify:\/\/shop_images\/josephine-bredehoft-KsAo8ouBn8A-unsplash.jpg",
           "cover_title": "New Releases",
           "cover_title_desktop_position": "left",
-          "show_overlay": true,
+          "cover_banner_image": "shopify:\/\/shop_images\/Wallpaper_2048.jpg",
+          "show_overlay": false,
           "overlay_color": "#242424",
           "overlay_text": "#ffffff",
           "overlay_opacity": "0.3"
