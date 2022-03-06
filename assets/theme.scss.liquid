@@ -5882,6 +5882,11 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   transition: opacity 0.25s ease-out;
   z-index: $z-index-base;
   text-align: center;
+
+  &.sticky {
+    position: fixed;
+  }
+  
   @include transform(translate(-50%, -50%));
 
   @include media-query($medium-up) {
