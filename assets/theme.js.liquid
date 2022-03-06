@@ -1411,9 +1411,9 @@ theme.FeaturedSlider = (function() {
         // console.log('pos', pos);
         const position = ($parent.height() - ($this.height() * 2.25));
         if ($window.scrollTop() > position) {
-          $this.removeClass('sticky');
+          $this.removeClass('show');
         } else {
-          $this.addClass('sticky');
+          $this.addClass('show');
         }
     });
 };
