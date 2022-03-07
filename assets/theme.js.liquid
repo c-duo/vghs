@@ -1396,8 +1396,6 @@ theme.FeaturedSlider = (function() {
 //     _toggleViewState();
 
 //     theme.cache.$window.on('resize', $.debounce(_toggleViewState.bind(this)));
-      // window.onscroll = function() {_stickyFeaturedBanner(this)};
-      // theme.cache.$window.on('scroll', _stickyFeaturedBanner(this));
       _transitionBanner();
   }
   
@@ -1407,8 +1405,6 @@ theme.FeaturedSlider = (function() {
         $window = $(window);
 
     $window.scroll(function (e) {
-        // console.log('$window.scrollTop', $window.scrollTop());
-        // console.log('pos', pos);
         const position = ($parent.height() - ($this.height() * 2.25));
         if ($window.scrollTop() > position) {
           $this.removeClass('show');
