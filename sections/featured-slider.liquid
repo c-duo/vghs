@@ -29,7 +29,7 @@
 </style>
 
 <div id="featured-slider-{{ section.id }}" class="featured-slider-section" data-section-id="{{ section.id }}" data-section-type="featured-slider-section">
-  <div class="featured-slider__cover">
+  <!-- <div class="featured-slider__cover">
     <div class="featured-slider__cover-background featured-slider__cover-background--top reveal-slider__cover-background--top side-scroller__cover-background">
       {% if section.settings.cover_image == blank %}
         {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -58,14 +58,29 @@
         <div class="pinch-indicator pinch-indicator--bottom"></div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="featured-slider__slides-container side-scroller__slides-container slider" tabindex="-1">
+    <div class="featured-slider__cover featured-slider__cover-background-image lazyload" data-bgset="{% include 'bgset', image: section.settings.cover_image %}"></div>
+    <div class="featured-slider__cover-content reveal-slider__cover-content side-scroller__cover-content{% if section.settings.cover_title_desktop_position == 'left' %} featured-slider__cover-content--left{% endif %} show">
+      <h2 class="featured-slider__cover-title h3"{% if section.settings.show_overlay %} style="color: {{ section.settings.overlay_text }}; border-color: {{ section.settings.overlay_text }};"{% endif %} data-animate>{{ section.settings.cover_title }}</h2>
 
-    <button class="btn btn--clear featured-slider__close reveal-slider__close">
+      {% assign img_url = section.settings.cover_banner_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+      <img class="lazyload"
+        data-src="{{ img_url }}"
+        data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+        data-aspectratio="{{ section.settings.cover_banner_image.aspect_ratio }}"
+        data-sizes="auto"
+        alt="{{ section.settings.cover_banner_image.alt | escape }}">
+      <!-- <div class="pinch-indicators">
+        <div class="pinch-indicator pinch-indicator--top"></div>
+        <div class="pinch-indicator pinch-indicator--bottom"></div>
+      </div> -->
+    </div>
+    <!-- <button class="btn btn--clear featured-slider__close reveal-slider__close">
       <span class="featured-slider__close-icon">{% include 'icon-close' %}</span>
       <span class="featured-slider__close-circle" style="border-color: {{ section.settings.text_color }}"></span>
-    </button>
+    </button> -->
 
     <div class="featured-slider__slide-list">
       {% for block in section.blocks %}
@@ -412,6 +427,33 @@
           "value": "center"
         }
       ]
+    },
+    {
+      "type": "image_picker",
+      "id": "cover_banner_image",
+      "label": {
+        "cs": "Obrázek",
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pl": "Obraz",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "tr": "Görsel",
+        "vi": "Hình ảnh",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
     },
     {
       "type": "header",

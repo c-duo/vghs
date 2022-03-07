@@ -3407,7 +3407,7 @@ $slick-opacity-not-active: 0.25;
 }
 
 .site-header-wrapper {
-  z-index: 10;
+  z-index: $z-index-site-header;
   .template-index & {
     position: absolute;
   }
@@ -5757,6 +5757,9 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 }
 
 /*================ Cover ================*/
+.featured-slider__cover {
+  z-index: 4;
+}
 .featured-slider__cover-background {
   position: absolute;
   left: 0;
@@ -5870,14 +5873,19 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 }
 
 .featured-slider__cover-content {
-  position: absolute;
+  position: fixed;
   top: 50vh;
   left: 50%;
   width: 33%;
-  opacity: 1;
-  transition: opacity 0.25s ease-out;
-  z-index: $z-index-medium;
+  opacity: 0;
+  transition: opacity 0.15s ease-in;
+  z-index: $z-index-base;
   text-align: center;
+
+  &.show {
+    opacity: 1;
+  }
+
   @include transform(translate(-50%, -50%));
 
   @include media-query($medium-up) {
@@ -5912,7 +5920,6 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 .featured-slider__cover-title {
   padding-bottom: 4px;
   cursor: default;
-  opacity: 0;
   @include transform(translateY(20%));
 
   &.has-animated {
@@ -6074,6 +6081,8 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 }
 
 .featured-slider__slide-list {
+  position: relative;
+  z-index: 5;
   @include media-query($medium-up) {
     padding: 20vh 0;
   }
@@ -6107,7 +6116,7 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   max-width: 45%;
 
   @include media-query($medium-up) {
-    padding: 20vh 0;
+    padding: 0 0 20vh;
   }
 
   @include media-query($small) {

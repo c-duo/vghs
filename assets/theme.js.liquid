@@ -1396,9 +1396,24 @@ theme.FeaturedSlider = (function() {
 //     _toggleViewState();
 
 //     theme.cache.$window.on('resize', $.debounce(_toggleViewState.bind(this)));
+      _transitionBanner();
   }
   
-  
+  function _transitionBanner() {
+    const $this = $('.featured-slider__cover-content'),
+        $parent = $('.featured-slider__slides-container'),
+        $window = $(window);
+
+    $window.scroll(function (e) {
+        const position = ($parent.height() - ($this.height() * 2.25));
+        if ($window.scrollTop() > position) {
+          $this.removeClass('show');
+        } else {
+          $this.addClass('show');
+        }
+    });
+};
+
   function _toggleViewState() {
     console.log('toggleViewState');
     var windowWidth = $(window).innerWidth();
