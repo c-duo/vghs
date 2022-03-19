@@ -40,7 +40,7 @@
         {% endif %}
 
         {% if product.images.size > 0 %}
-          <div class="product__photo grid__item {{ grid_item_width }}">
+          <div class="product__photo grid__item {{ grid_item_width }} product-item__image--margins">
             {% for image in product.images %}
               {% assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
               <div data-image-id="{{ image.id }}" class="product__photo--single product__photo--variant-wrapper
