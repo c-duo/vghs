@@ -199,6 +199,7 @@
       image setting style is 'portrait' and there is a duplicate_image to show
     {% endcomment %}
     {% if is_portrait_image and product.images.size > 1 and duplicate_image %}
+      BAZ
       <div class="product__photo grid__item medium-up--hide {{ grid_item_width }}">
         <noscript>
           <img src="{{ duplicate_image | img_url: '2048x2048' }}" alt="{{ duplicate_image.alt | escape }}">
@@ -220,6 +221,7 @@
       Show other product images below product info if there's any left to show
     {% endcomment %}
     {% if index < product.images.size %}
+      FOO
       {% for image in product.images offset:index_offset %}
         {% unless image == first_image %}
           {% unless section.settings.skip_first_product_image and image == product.featured_image %}
