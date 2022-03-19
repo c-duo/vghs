@@ -5873,7 +5873,7 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 }
 
 .featured-slider__cover-content {
-  position: fixed;
+  position: relative;
   top: 55vh;
   left: 50%;
   width: 45%;
@@ -5885,6 +5885,7 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 
   &.show {
     opacity: 1;
+    position: fixed;
   }
 
   img {
