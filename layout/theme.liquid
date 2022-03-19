@@ -117,7 +117,7 @@
           {% include 'action-bar' %}
 
           {%- if request.page_type == 'search' and search.performed -%}
-            <div class="action-bar">
+            <div class="search-results-bar">
               <div class="search__results-count">
                 {{ 'general.search.results_with_count' | t: count: search.results_count, term: search.terms }}
               </div>
