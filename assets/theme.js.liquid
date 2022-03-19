@@ -1405,7 +1405,7 @@ theme.FeaturedSlider = (function() {
         $window = $(window);
 
     $window.scroll(function (e) {
-        const position = ($parent.height() + ($this.height()));
+        const position = ($parent.height());
         if ($window.scrollTop() > position) {
           $this.removeClass('show');
         } else {
