@@ -1410,9 +1410,9 @@ theme.FeaturedSlider = (function() {
         console.log('$parent height', $parent.height());
         console.log('$window scrollTop', $window.scrollTop());
         if ($window.scrollTop() > position) {
-          $this.removeClass('bottom');
-        } else {
           $this.addClass('bottom');
+        } else {
+          $this.removeClass('bottom');
         }
     });
 };
