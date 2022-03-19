@@ -1403,12 +1403,12 @@ theme.FeaturedSlider = (function() {
     const $this = $('.featured-slider__cover-content'),
         $parent = $('.featured-slider__slides-container'),
         $window = $(window);
-    console.log('$this height', $this.height());
-    console.log('$parent height', $parent.height());
-    console.log('$window scrollTop', $window.scrollTop());
 
     $window.scroll(function (e) {
         const position = ($parent.height() + $this.height());
+        console.log('$this height', $this.height());
+        console.log('$parent height', $parent.height());
+        console.log('$window scrollTop', $window.scrollTop());
         if ($window.scrollTop() > position) {
           $this.removeClass('show');
         } else {
