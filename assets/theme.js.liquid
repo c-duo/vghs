@@ -1405,7 +1405,7 @@ theme.FeaturedSlider = (function() {
         $window = $(window);
 
     $window.scroll(function (e) {
-        const position = ($parent.height() - ($this.height() * .8));
+        const position = ($parent.height() - ($this.height()));
         console.log('$this height', $this.height());
         console.log('$parent height', $parent.height());
         console.log('$window scrollTop', $window.scrollTop());
