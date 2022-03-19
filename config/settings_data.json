@@ -29,7 +29,7 @@
     "social_facebook_link": "#",
     "social_instagram_link": "#",
     "social_youtube_link": "#",
-    "share_facebook": true,
+    "share_facebook": false,
     "share_twitter": false,
     "share_pinterest": false,
     "favicon": "shopify:\/\/shop_images\/VGHS_V-logo.png",
