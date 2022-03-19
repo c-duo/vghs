@@ -2028,6 +2028,7 @@ h1 {
 
 h2 {
   font-size: em(floor($font-size-header * 0.85)); //20px
+  text-transform: capitalize;
   div {
     border-bottom: $color-action-bar-active solid 2px;
     display: inline-block;
@@ -2493,6 +2494,8 @@ select {
   @include placeholder-text($color-body-text, 0.6);
 
   background-color: $color-form;
+  background-color: darken($color-form, 30%);
+
   border: 0 none;
   max-width: 100%;
 
