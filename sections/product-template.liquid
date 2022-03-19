@@ -15,8 +15,8 @@
   <meta itemprop="name" content="{{ product.title }}{% if product.variants.size > 1 and product.selected_variant %} - {{ current_variant.title }}{% endif %}">
 
   <div class="product grid grid--uniform grid--no-gutters" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-    <div class="grid__item">
-      <div class="product-gallery grid">
+    <div class="product-gallery grid__item">
+      <div class="grid">
         {% assign first_image = featured_image %}
 
         {% if product.images.size > 1 and section.settings.skip_first_product_image and first_image == product.featured_image %}
