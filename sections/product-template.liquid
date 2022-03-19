@@ -110,7 +110,6 @@
           Show other product images below product info if there's any left to show
         {% endcomment %}
         {% if index < product.images.size %}
-          FOO
           {% for image in product.images offset:index_offset %}
             {% unless image == first_image %}
               {% unless section.settings.skip_first_product_image and image == product.featured_image %}
@@ -138,7 +137,7 @@
 
     <div class="product__details grid__item">
       <div class="grid grid--no-gutters product__details-content">
-        <div class="grid__item {% if section.settings.product_form_width == 'large' %}medium-up--three-twelfths medium-up--push-one-fifth{% else %}large-up--two-twelfths large-up--push-two-twelfths medium-up--three-twelfths medium-up--push-one-twelfth{% endif %}">
+        <div class="grid__item">
           {% if section.settings.show_vendor %}
             <p class="product-item__vendor small--text-center">{{ product.vendor }}</p>
           {% endif %}
