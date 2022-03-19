@@ -5874,17 +5874,22 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 
 .featured-slider__cover-content {
   position: fixed;
-  top: 55vh;
+  bottom: -40vh;
   left: 50%;
   width: 45%;
   height: 86vh;
-  opacity: 0;
-  transition: opacity 0.15s ease-in;
+  transition: bottom 0.15s ease-in;
   z-index: $z-index-base;
   text-align: center;
 
   &.show {
     opacity: 1;
+    position: fixed;
+  }
+
+  &.bottom {
+    position: absolute;
+    bottom: 5vh;
   }
 
   img {
