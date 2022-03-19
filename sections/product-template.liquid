@@ -103,7 +103,34 @@
           {% endunless %}
         {% endfor %}
       {% endif %}
+    {% endif %}
 
+    {% comment %}
+      Show other product images below product info if there's any left to show
+    {% endcomment %}
+    {% if index < product.images.size %}
+      FOO
+      {% for image in product.images offset:index_offset %}
+        {% unless image == first_image %}
+          {% unless section.settings.skip_first_product_image and image == product.featured_image %}
+            <div class="product__photo grid__item {{ grid_item_width }}">
+              <noscript>
+                <img src="{{ image | img_url: '2048x2048' }}" alt="{{ image.alt | escape }}">
+              </noscript>
+              {% assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+              <div class="product__photo--single" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+                <img class="lazyload"
+                  src="{{ image | img_url: '300x' }}"
+                  data-src="{{ img_url }}"
+                  data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                  data-aspectratio="{{ image.aspect_ratio }}"
+                  data-sizes="auto"
+                  alt="{{ image.alt | escape }}">
+              </div>
+            </div>
+          {% endunless %}
+        {% endunless %}
+      {% endfor %}
     {% endif %}
 
     <div class="product__details grid__item">
@@ -215,34 +242,6 @@
             alt="{{ duplicate_image.alt | escape }}">
         </div>
       </div>
-    {% endif %}
-
-    {% comment %}
-      Show other product images below product info if there's any left to show
-    {% endcomment %}
-    {% if index < product.images.size %}
-      FOO
-      {% for image in product.images offset:index_offset %}
-        {% unless image == first_image %}
-          {% unless section.settings.skip_first_product_image and image == product.featured_image %}
-            <div class="product__photo grid__item {{ grid_item_width }}">
-              <noscript>
-                <img src="{{ image | img_url: '2048x2048' }}" alt="{{ image.alt | escape }}">
-              </noscript>
-              {% assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
-              <div class="product__photo--single" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
-                <img class="lazyload"
-                  src="{{ image | img_url: '300x' }}"
-                  data-src="{{ img_url }}"
-                  data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
-                  data-aspectratio="{{ image.aspect_ratio }}"
-                  data-sizes="auto"
-                  alt="{{ image.alt | escape }}">
-              </div>
-            </div>
-          {% endunless %}
-        {% endunless %}
-      {% endfor %}
     {% endif %}
   </div>
 </div>
