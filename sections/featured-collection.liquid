@@ -1,17 +1,17 @@
+{% comment %}
+  By default, featured products come from your Frontpage collection.
+  This collection is empty by default and must have products added to it
+{% endcomment %}
+{% if section.settings.home_featured_products == blank %}
+  home_featured_products == blank
+  {% assign featured_collection = "frontpage" %}
+{% else %}
+  {% assign featured_collection = section.settings.home_featured_products %}
+{% endif %}
+<a name="{{ featured_collection }}"></a>
 <div class="featured-collection" data-section-id="{{ section.id }}" data-section-type="featured-collection-section">
-  {% comment %}
-    By default, featured products come from your Frontpage collection.
-    This collection is empty by default and must have products added to it
-  {% endcomment %}
-  {% if section.settings.home_featured_products == blank %}
-  	home_featured_products == blank
-    {% assign featured_collection = "frontpage" %}
-  {% else %}
-    {% assign featured_collection = section.settings.home_featured_products %}
-  {% endif %}
-
   {% comment %}Heading for screen readers{% endcomment %}
-  <h2><div>{{ featured_collection }}</div></h2>
+  <h2><div>{{ section.settings.heading }}</div></h2>
 
   <div class="grid grid--no-gutters grid--uniform collection-grid">
     {% comment %}
