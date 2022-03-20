@@ -112,6 +112,10 @@
       <span class="site-footer__copyright">&copy; {{ 'now' | date: '%Y' }}, <a href="{{ routes.root_url }}">{{ shop.name }}</a>. {{ powered_by_link }}</span>
     </div>
     <div class="grid__item large-up--one-quarter text-center">
+      <p><a href="#featured-slider">
+        <span class="icon icon-arrow" aria-hidden="true"></span>
+        Back to top
+      </a></p>
       {%- if section.settings.show_payment_icons -%}
         {%- unless shop.enabled_payment_types == empty -%}
           <span class="visually-hidden">{{ 'general.payment.method' | t }}</span>
