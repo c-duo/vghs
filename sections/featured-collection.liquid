@@ -1,17 +1,17 @@
+{% comment %}
+  By default, featured products come from your Frontpage collection.
+  This collection is empty by default and must have products added to it
+{% endcomment %}
+{% if section.settings.home_featured_products == blank %}
+  home_featured_products == blank
+  {% assign featured_collection = "frontpage" %}
+{% else %}
+  {% assign featured_collection = section.settings.home_featured_products %}
+{% endif %}
+<a name="{{ featured_collection }}"></a>
 <div class="featured-collection" data-section-id="{{ section.id }}" data-section-type="featured-collection-section">
-  {% comment %}
-    By default, featured products come from your Frontpage collection.
-    This collection is empty by default and must have products added to it
-  {% endcomment %}
-  {% if section.settings.home_featured_products == blank %}
-  	home_featured_products == blank
-    {% assign featured_collection = "frontpage" %}
-  {% else %}
-    {% assign featured_collection = section.settings.home_featured_products %}
-  {% endif %}
-
   {% comment %}Heading for screen readers{% endcomment %}
-  <h2><div>{{ featured_collection }}</div></h2>
+  <h2><div>{{ section.settings.heading }}</div></h2>
 
   <div class="grid grid--no-gutters grid--uniform collection-grid">
     {% comment %}
@@ -90,6 +90,33 @@
         "vi": "Bộ sưu tập",
         "zh-CN": "收藏",
         "zh-TW": "商品系列"
+      }
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": {
+        "cs": "Nadpis",
+        "da": "Overskrift",
+        "de": "Überschrift",
+        "en": "Heading",
+        "es": "Título",
+        "fi": "Otsake",
+        "fr": "Titre",
+        "it": "Titolo",
+        "ja": "見出し",
+        "ko": "제목",
+        "nb": "Overskrift",
+        "nl": "Kop",
+        "pl": "Nagłówek",
+        "pt-BR": "Título",
+        "pt-PT": "Título",
+        "sv": "Rubrik",
+        "th": "ส่วนหัว",
+        "tr": "Başlık",
+        "vi": "Tiêu đề",
+        "zh-CN": "标题",
+        "zh-TW": "標題"
       }
     },
     {

@@ -173,6 +173,7 @@
       "16422948863b39dfee": {
         "type": "featured-collection",
         "settings": {
+          "heading": "Pins & Stickers",
           "home_featured_products": "pins",
           "product_image_type": "portrait",
           "product_image_size": "medium",
@@ -192,6 +193,7 @@
       "1642978017362aa3a2": {
         "type": "featured-collection",
         "settings": {
+          "heading": "Collectibles",
           "home_featured_products": "collectibles",
           "product_image_type": "portrait",
           "product_image_size": "medium",
@@ -202,6 +204,7 @@
       "164297804255434300": {
         "type": "featured-collection",
         "settings": {
+          "heading": "Gift Cards",
           "home_featured_products": "gift-cards",
           "product_image_type": "portrait",
           "product_image_size": "medium",
@@ -291,6 +294,7 @@
       "164349696609980e0b": {
         "type": "featured-collection",
         "settings": {
+          "heading": "Apparel",
           "home_featured_products": "apparel",
           "product_image_type": "portrait",
           "product_image_size": "medium",
@@ -301,6 +305,7 @@
       "16434970908a561940": {
         "type": "featured-collection",
         "settings": {
+          "heading": "Posters",
           "home_featured_products": "posters",
           "product_image_type": "portrait",
           "product_image_size": "medium",
