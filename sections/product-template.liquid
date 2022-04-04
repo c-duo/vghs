@@ -32,7 +32,10 @@
           {% elsif product.images.size == 2 and section.settings.skip_first_product_image %}
             {% assign grid_item_width = '' %}
           {% else %}
+            {% assign grid_item_width = '' %}
+            {% comment %}
             {% assign grid_item_width = 'medium-up--one-quarter' %}
+            {% endcomment %}
           {% endif %}
           {% assign is_portrait_image = true %}
         {% else %}
@@ -75,7 +78,6 @@
             If we have portrait images, we show two per row, so let's get a second image.
             That image will be moved down below the description on mobile, hence why we'll use
             `small--hide`. The image moved down is stored in the variable `duplicate_image`.
-          {% endcomment %}
 
           {% if is_portrait_image %}
             {% for image in product.images %}
@@ -104,11 +106,11 @@
               {% endunless %}
             {% endfor %}
           {% endif %}
+          {% endcomment %}
         {% endif %}
 
         {% comment %}
           Show other product images below product info if there's any left to show
-        {% endcomment %}
         {% if index < product.images.size %}
           {% for image in product.images offset:index_offset %}
             {% unless image == first_image %}
@@ -132,6 +134,7 @@
             {% endunless %}
           {% endfor %}
         {% endif %}
+        {% endcomment %}
       </div>
     </div>
 
@@ -229,7 +232,6 @@
     {% endcomment %}
     {% if is_portrait_image and product.images.size > 1 and duplicate_image %}
       <div class="product__photo grid__item medium-up--hide {{ grid_item_width }}">
-        BAZ
         <noscript>
           <img src="{{ duplicate_image | img_url: '2048x2048' }}" alt="{{ duplicate_image.alt | escape }}">
         </noscript>
