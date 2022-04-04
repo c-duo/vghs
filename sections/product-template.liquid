@@ -108,7 +108,6 @@
 
         {% comment %}
           Show other product images below product info if there's any left to show
-        {% endcomment %}
         {% if index < product.images.size %}
           {% for image in product.images offset:index_offset %}
             {% unless image == first_image %}
@@ -132,6 +131,7 @@
             {% endunless %}
           {% endfor %}
         {% endif %}
+        {% endcomment %}
       </div>
     </div>
 
