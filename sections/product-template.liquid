@@ -232,7 +232,6 @@
     {% endcomment %}
     {% if is_portrait_image and product.images.size > 1 and duplicate_image %}
       <div class="product__photo grid__item medium-up--hide {{ grid_item_width }}">
-        BAZ
         <noscript>
           <img src="{{ duplicate_image | img_url: '2048x2048' }}" alt="{{ duplicate_image.alt | escape }}">
         </noscript>
