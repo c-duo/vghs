@@ -32,7 +32,10 @@
           {% elsif product.images.size == 2 and section.settings.skip_first_product_image %}
             {% assign grid_item_width = '' %}
           {% else %}
+            {% assign grid_item_width = '' %}
+            {% comment %}
             {% assign grid_item_width = 'medium-up--one-quarter' %}
+            {% endcomment %}
           {% endif %}
           {% assign is_portrait_image = true %}
         {% else %}
