@@ -14,6 +14,7 @@
   <meta itemprop="image" content="{{ featured_image | img_url: 'grande' }}">
   <meta itemprop="name" content="{{ product.title }}{% if product.variants.size > 1 and product.selected_variant %} - {{ current_variant.title }}{% endif %}">
 
+  {% comment %}
   <div class="product grid grid--uniform" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
     <div class="product__gallery grid__item medium-up--two-thirds">
       <div class="grid">
@@ -23,9 +24,7 @@
           {% assign first_image = product.images[1] %}
         {% endif %}
 
-        {% comment %}
           Set variables for product image grid
-        {% endcomment %}
         {% if section.settings.product_image_type == 'portrait' %}
           {% if product.images.size == 1 %}
             {% assign grid_item_width = '' %}
@@ -66,16 +65,12 @@
             </noscript>
           </div>
 
-          {% comment %}
             Counting images shown on the page
-          {% endcomment %}
           {% assign index = 1 %}
 
-          {% comment %}
             If we have portrait images, we show two per row, so let's get a second image.
             That image will be moved down below the description on mobile, hence why we'll use
             `small--hide`. The image moved down is stored in the variable `duplicate_image`.
-          {% endcomment %}
 
           {% if is_portrait_image %}
             {% for image in product.images %}
@@ -106,9 +101,7 @@
           {% endif %}
         {% endif %}
 
-        {% comment %}
           Show other product images below product info if there's any left to show
-        {% endcomment %}
         {% if index < product.images.size %}
           {% for image in product.images offset:index_offset %}
             {% unless image == first_image %}
@@ -148,9 +141,7 @@
             product__form--add-to-cart{% if section.settings.product_form_width == 'large' %} product__form--full-width{% endif %}
           {%- endcapture -%}
             {% form 'product', product, id:form_id, class:form_class, data-cart-form: '' %}
-            {% comment %}
               Select element hidden when JS initializes. Safeguard for JS-disabled.
-            {% endcomment %}
             <select name="id" id="ProductSelect-{{ section.id }}">
               {% for variant in product.variants %}
                 <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} {% unless variant.available %} disabled="disabled" {% endunless %} value="{{ variant.id }}" data-sku="{{ variant.sku }}">{{ variant.title }} - {% if variant.available %}{{ variant.price | money_with_currency }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</option>
@@ -223,10 +214,8 @@
       </div>
     </div>
 
-    {% comment %}
       Show second product photo after description on mobile if
       image setting style is 'portrait' and there is a duplicate_image to show
-    {% endcomment %}
     {% if is_portrait_image and product.images.size > 1 and duplicate_image %}
       <div class="product__photo grid__item medium-up--hide {{ grid_item_width }}">
         BAZ
@@ -247,6 +236,7 @@
     {% endif %}
   </div>
 </div>
+{% endcomment %}
 
 {% unless product == empty %}
   <script type="application/json" id="ProductJson-{{ section.id }}">
