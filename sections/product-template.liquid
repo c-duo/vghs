@@ -75,7 +75,6 @@
             If we have portrait images, we show two per row, so let's get a second image.
             That image will be moved down below the description on mobile, hence why we'll use
             `small--hide`. The image moved down is stored in the variable `duplicate_image`.
-          {% endcomment %}
 
           {% if is_portrait_image %}
             {% for image in product.images %}
@@ -104,6 +103,7 @@
               {% endunless %}
             {% endfor %}
           {% endif %}
+          {% endcomment %}
         {% endif %}
 
         {% comment %}
