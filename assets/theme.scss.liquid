@@ -3882,11 +3882,12 @@ $slick-opacity-not-active: 0.25;
 .product-item__title {
   @include header-font-stack();
   color: $color-headings-text;
-  font-size: em(floor($font-size-header * 0.83)); // 20px
+  // font-size: em(floor($font-size-header * 0.83)); // 20px
+  font-size: em(floor($font-size-header * 0.6)); // 15px
 
-  @include media-query($medium-down) {
-    font-size: em(floor($font-size-header * 0.6)); // 15px
-  }
+  // @include media-query($medium-down) {
+  //   font-size: em(floor($font-size-header * 0.6)); // 15px
+  // }
 }
 
 .product-item__meta__inner {
