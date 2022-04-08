@@ -2217,14 +2217,12 @@ a {
   // color: $color-body;
   background-color: $color-action-bar-bg;
   color: $color-action-bar-text;
-  border: 2px solid $color-body;
   min-height: 47px;
   padding: 6px 30px;
 
   &:hover {
     background-color: $color-link;
     color: $color-body;
-    border: 2px solid $color-body;
     opacity: 0.8;
   }
 
@@ -2232,7 +2230,6 @@ a {
   &:focus {
     background-color: transparent;
     color: $color-body;
-    border: 2px solid $color-body;
   }
 
   &[disabled],
@@ -3885,11 +3882,12 @@ $slick-opacity-not-active: 0.25;
 .product-item__title {
   @include header-font-stack();
   color: $color-headings-text;
-  font-size: em(floor($font-size-header * 0.83)); // 20px
+  // font-size: em(floor($font-size-header * 0.83)); // 20px
+  font-size: em(floor($font-size-header * 0.6)); // 15px
 
-  @include media-query($medium-down) {
-    font-size: em(floor($font-size-header * 0.6)); // 15px
-  }
+  // @include media-query($medium-down) {
+  //   font-size: em(floor($font-size-header * 0.6)); // 15px
+  // }
 }
 
 .product-item__meta__inner {
@@ -4760,8 +4758,8 @@ $slick-opacity-not-active: 0.25;
   @include media-query($small) {
     margin: $gutter-site 0 0;
 
-    //specificity to override gutterless grid
-    &.grid__item {
+    .h2 {
+      text-align: center;
       padding: 0 $gutter-site;
     }
   }
@@ -4906,7 +4904,9 @@ $slick-opacity-not-active: 0.25;
 
 @include media-query($small) {
   .product__form--add-to-cart {
-    margin-bottom: $gutter-site;
+    // margin-bottom: $gutter-site;
+    padding: 0 $gutter-site;
+    margin: 0 auto;
   }
 }
 
