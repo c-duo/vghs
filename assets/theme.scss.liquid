@@ -2217,7 +2217,6 @@ a {
   // color: $color-body;
   background-color: $color-action-bar-bg;
   color: $color-action-bar-text;
-  border: 2px solid $color-body;
   min-height: 47px;
   padding: 6px 30px;
 
@@ -4760,20 +4759,10 @@ $slick-opacity-not-active: 0.25;
   @include media-query($small) {
     margin: $gutter-site 0 0;
 
-    //specificity to override gutterless grid
-    .grid__item {
-      // padding: 0 $gutter-site;
-    }
-
     .h2 {
       text-align: center;
       padding: 0 $gutter-site;
     }
-
-    // .grid__item {
-    //   padding-left: inherit;
-    //   padding-bottom: inherit;
-    // }
   }
 }
 
