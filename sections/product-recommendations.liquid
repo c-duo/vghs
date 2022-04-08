@@ -7,7 +7,7 @@
         {%- endif -%}
 
         <div class="grid grid--no-gutters grid--uniform collection-grid">
-          {%- assign grid_item_width = 'medium-down--one-half large-up--one-eighth' -%}
+          {%- assign grid_item_width = 'medium-down--one-quarter large-up--one-eighth' -%}
           <div class="grid__item large-up--one-quarter">&nbsp;</div>
           {%- for product in recommendations.products -%}
             {%- assign price = product.price | money_without_trailing_zeros -%}
