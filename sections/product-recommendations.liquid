@@ -6,6 +6,9 @@
           <h2 class="h2 text-center">{{ section.settings.heading | escape }}</h2>
         {%- endif -%}
 
+        {%- comment -%}
+          Large and under
+        {%- endcomment -%}
         <div class="grid grid--no-gutters grid--uniform collection-grid widescreen--hide">
           {%- assign grid_item_width = 'medium--one-half large-up--one-quarter' -%}
           {%- for product in recommendations.products -%}
@@ -13,6 +16,9 @@
             {% include 'product-grid-item' with product_image_spacing: true, vendor_enable: section.settings.vendor_enable %}
           {%- endfor -%}
         </div>
+        {%- comment -%}
+          Widescreen only, needs special gutters
+        {%- endcomment -%}
         <div class="grid grid--no-gutters grid--uniform collection-grid hide widescreen--show">
           {%- assign grid_item_width = 'widescreen--one-eighth' -%}
           <div class="grid__item widescreen--one-quarter">&nbsp;</div>
