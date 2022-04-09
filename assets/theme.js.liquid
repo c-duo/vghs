@@ -1401,16 +1401,16 @@ theme.FeaturedSlider = (function() {
   
   function _transitionBanner() {
     const $this = $('.featured-slider__cover-content'),
-        $thisBottom = $this.css('bottom').replace('px', ''),
+        $thisBottom = parseInt($this.css('bottom').replace('px', '')),
         $parent = $('.featured-slider__slides-container'),
         $window = $(window);
 
     $window.scroll(function (e) {
         // const position = ($parent.height() - ($this.height() * 1.4));
         // const position = ($parent.height() - ($window.height() * 1.42));
-        const position = ($parent.height() - ($window.height() + parseInt($thisBottom)));
+        const position = ($parent.height() - ($window.height() + $thisBottom));
         console.log('$this height', $this.height());
-        console.log('$this bottom', parseInt($thisBottom));
+        console.log('$this bottom', $thisBottom);
         console.log('$parent height', $parent.height());
         console.log('$window height', $window.height());
         // console.log('$window scrollTop', $window.scrollTop());
