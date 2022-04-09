@@ -5889,8 +5889,6 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 }
 
 .featured-slider__cover-content {
-  position: fixed;
-  bottom: -40vh;
   left: 50%;
   width: 45%;
   height: 86vh;
@@ -5905,6 +5903,8 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   @include transform(translate(-50%, -50%));
 
   @include media-query($medium-up) {
+    bottom: -40vh;
+    
     &.show {
       opacity: 1;
       position: fixed;
@@ -5914,7 +5914,7 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
       position: absolute;
       bottom: 5vh;
     }
-    
+
     .side-scroller--fixed & {
       position: fixed;
       will-change: transform;
