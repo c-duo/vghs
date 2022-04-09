@@ -5905,16 +5905,12 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   }
 
   @include media-query($medium-up) {
-    bottom: -40vh;
-    height: 86vh;
-    width: 45%;
+    bottom: 5vh;
     position: fixed;
-    @include transform(translate(-50%, -50%));
     transition: bottom 0.15s ease-in;
 
     &.bottom {
       position: absolute;
-      bottom: 5vh;
     }
 
     .side-scroller--fixed & {
@@ -5936,7 +5932,8 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 
 .featured-slider__cover-content--left {
   @include media-query($medium-up) {
-    left: 30%;
+    left: 8%;
+    width: 45%;
   }
 }
 
