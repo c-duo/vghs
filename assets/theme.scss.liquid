@@ -6086,11 +6086,6 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 .featured-slider__slides-container {
   transition: background-color 1s ease-out;
 
-  @include media-query($small) {
-    // height: 100vh;
-    // overflow: hidden;
-  }
-
   @include media-query($medium-up) {
     min-height: 100vh;
     width: 50%;
@@ -6111,41 +6106,12 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   display: block;
   cursor: default;
   padding: 10vh 0;
-
-  @include media-query($medium-up) {
-  }
-
-  @include media-query($small) {
-    // height: 100vh;
-    // display: none;
-    // position: absolute;
-
-    // &.slider__slide--active,
-    // &.slider__slide--previous,
-    // &.slider__slide--next {
-    //   display: block;
-    // }
-  }
 }
 
 .featured-slider__slide-content {
   position: relative;
   margin: 0 auto;
   max-width: 45%;
-  // padding: 0 0 20vh;
-
-  // @include media-query($medium-up) {
-  //   padding: 0 0 20vh;
-  // }
-
-  // @include media-query($small) {
-  //   position: absolute;
-  //   top: 50%;
-  //   left: 50%;
-  //   width: 100%;
-  //   max-width: 65vw;
-  //   @include transform(translate(-50%, -45%));
-  // }
 }
 
 .featured-slider__slide-image-container {
@@ -6177,64 +6143,6 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   letter-spacing: 1px;
   text-transform: uppercase;
 }
-
-/*================ Mobile Reveal Slider ================*/
-
-// .reveal-slider__nav {
-//   display: none;
-//   position: absolute;
-//   bottom: $gutter;
-//   left: 50%;
-//   @include transform(translateX(-50%));
-
-//   @include media-query($small) {
-//     display: block;
-//   }
-// }
-
-// .reveal-slider__nav-button {
-//   @include prefix(appearance, none, webkit moz spec);
-//   border-radius: 6px;
-//   border-width: 0;
-//   margin: 0 4px;
-//   padding: 0;
-//   height: 4px;
-//   width: 4px;
-//   opacity: 0.7;
-//   transition: opacity 0.15s ease-out;
-
-//   &.active {
-//     opacity: 1;
-//   }
-// }
-
-// .reveal-slider__previous,
-// .reveal-slider__next {
-//   position: absolute;
-//   top: 0;
-//   bottom: 0;
-//   width: 45px;
-//   opacity: 0;
-
-//   @include media-query($medium-up) {
-//     display: none;
-//   }
-// }
-
-// .reveal-slider__previous {
-//   left: 0;
-// }
-
-// .reveal-slider__next {
-//   right: 0;
-// }
-
-// .reveal-slider__previous-button,
-// .reveal-slider__next-button {
-//   display: inline-block;
-//   width: 100%;
-//   height: 100%;
-// }
 
 
 /*================ GIFT CARD ================*/
