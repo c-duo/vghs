@@ -5890,17 +5890,16 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 
 .featured-slider__cover-content {
   position: relative;
-  height: 86vh;
   z-index: $z-index-base;
   text-align: center;
 
   @include media-query($medium-up) {
+    bottom: -40vh;
+    height: 86vh;
+    width: 45%;
+    position: fixed;
     @include transform(translate(-50%, -50%));
     transition: bottom 0.15s ease-in;
-    // left: 50%;
-    position: fixed;
-    width: 45%;
-    bottom: -40vh;
 
     &.show {
       opacity: 1;
