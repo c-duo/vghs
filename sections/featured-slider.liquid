@@ -62,7 +62,7 @@
 
   <div class="featured-slider__slides-container side-scroller__slides-container slider" tabindex="-1">
     <div class="featured-slider__cover featured-slider__cover-background-image lazyload" data-bgset="{% include 'bgset', image: section.settings.cover_image %}"></div>
-    <div class="featured-slider__cover-content reveal-slider__cover-content side-scroller__cover-content{% if section.settings.cover_title_desktop_position == 'left' %} featured-slider__cover-content--left{% endif %}">
+    <div class="featured-slider__cover-content side-scroller__cover-content{% if section.settings.cover_title_desktop_position == 'left' %} featured-slider__cover-content--left{% endif %}">
       <h2 class="featured-slider__cover-title h3"{% if section.settings.show_overlay %} style="color: {{ section.settings.overlay_text }}; border-color: {{ section.settings.overlay_text }};"{% endif %} data-animate>{{ section.settings.cover_title }}</h2>
 
       {% assign img_url = section.settings.cover_banner_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
@@ -114,7 +114,7 @@
       {% endfor %}
     </div>
 
-    <div class="reveal-slider__nav">
+    <!-- <div class="reveal-slider__nav">
       {% for block in section.blocks %}
         <button class="reveal-slider__nav-button{% if forloop.first %} active{% endif %}" style="background-color: {{ section.settings.text_color }}">
           <span class="visually-hidden">{{ 'sections.slider.slide' | t: number: forloop.index }}</span>
@@ -132,7 +132,7 @@
       <button class="reveal-slider__next-button">
         <span class="visually-hidden">{{ 'sections.slider.next_slide' | t }}</span>
       </button>
-    </div>
+    </div> -->
 
   </div>
 </div>
