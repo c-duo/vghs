@@ -1407,8 +1407,9 @@ theme.FeaturedSlider = (function() {
     $window.scroll(function (e) {
         // const position = ($parent.height() - ($this.height() * 1.4));
         // const position = ($parent.height() - ($window.height() * 1.42));
-        const position = ($window.height() - $this.height());
+        const position = ($window.height() - ($this.css('bottom') + $this.height()));
         console.log('$this height', $this.height());
+        console.log('$this bottom', $this.css('bottom'));
         // console.log('$parent height', $parent.height());
         console.log('$window height', $window.height());
         // console.log('$window scrollTop', $window.scrollTop());
