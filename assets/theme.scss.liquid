@@ -5893,6 +5893,12 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   z-index: $z-index-base;
   text-align: center;
 
+  @include media-query($large-up) {
+    img {
+      height: 78vh;
+    }
+  }
+
   @include media-query($medium-up) {
     bottom: -40vh;
     height: 86vh;
@@ -5909,10 +5915,6 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
     &.bottom {
       position: absolute;
       bottom: 5vh;
-    }
-
-    img {
-      height: 78vh;
     }
 
     .side-scroller--fixed & {
