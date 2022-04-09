@@ -5902,7 +5902,8 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   @include transform(translate(-50%, -50%));
 
   @include media-query($medium-up) {
-    left: 50%;
+    // left: 50%;
+    position: fixed;
     width: 45%;
     bottom: -40vh;
 
@@ -5929,9 +5930,6 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   }
 
   @include media-query($small) {
-    width: auto;
-    left: auto;
-
     .open & {
       opacity: 0;
       pointer-events: none;
