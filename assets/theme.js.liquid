@@ -1413,8 +1413,10 @@ theme.FeaturedSlider = (function() {
         console.log('$window height', $window.height());
         // console.log('$window scrollTop', $window.scrollTop());
         if ($window.scrollTop() > position) {
+          console.log('add bottom class', position);
           $this.addClass('bottom');
         } else {
+          console.log('remove bottom class', position);
           $this.removeClass('bottom');
         }
     });
