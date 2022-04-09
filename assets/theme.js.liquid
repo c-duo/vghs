@@ -1408,18 +1408,18 @@ theme.FeaturedSlider = (function() {
     $window.scroll(function (e) {
         // const position = ($parent.height() - ($this.height() * 1.4));
         // const position = ($parent.height() - ($window.height() * 1.42));
-        const position = ($parent.height() - ($window.height() + $thisBottom));
+        const position = ($parent.height() - ($window.height() + parseInt($thisBottom)));
         console.log('$this height', $this.height());
-        console.log('$this bottom', $thisBottom);
+        console.log('$this bottom', parseInt($thisBottom));
         console.log('$parent height', $parent.height());
         console.log('$window height', $window.height());
         // console.log('$window scrollTop', $window.scrollTop());
         if ($window.scrollTop() > position) {
           console.log('add bottom class', position);
-          console.log('($window.height() + $thisBottom)', ($window.height() + $thisBottom));
+          console.log('($window.height() + parseInt($thisBottom))', ($window.height() + parseInt($thisBottom)));
           $this.addClass('bottom');
         } else {
-          console.log('($parent.height() - ($window.height() + $thisBottom))', ($parent.height() - ($window.height() + $thisBottom)));
+          console.log('($parent.height() - ($window.height() + parseInt($thisBottom)))', ($parent.height() - ($window.height() + parseInt($thisBottom))));
           console.log('remove bottom class', position);
           $this.removeClass('bottom');
         }
