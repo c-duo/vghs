@@ -5894,10 +5894,6 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   z-index: $z-index-base;
   text-align: center;
 
-  img {
-    height: 78vh;
-  }
-
   @include media-query($medium-up) {
     @include transform(translate(-50%, -50%));
     transition: bottom 0.15s ease-in;
@@ -5914,6 +5910,10 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
     &.bottom {
       position: absolute;
       bottom: 5vh;
+    }
+
+    img {
+      height: 78vh;
     }
 
     .side-scroller--fixed & {
