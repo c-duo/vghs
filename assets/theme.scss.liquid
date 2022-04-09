@@ -5898,16 +5898,6 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   z-index: $z-index-base;
   text-align: center;
 
-  &.show {
-    opacity: 1;
-    position: fixed;
-  }
-
-  &.bottom {
-    position: absolute;
-    bottom: 5vh;
-  }
-
   img {
     height: 78vh;
   }
@@ -5915,6 +5905,16 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   @include transform(translate(-50%, -50%));
 
   @include media-query($medium-up) {
+    &.show {
+      opacity: 1;
+      position: fixed;
+    }
+
+    &.bottom {
+      position: absolute;
+      bottom: 5vh;
+    }
+    
     .side-scroller--fixed & {
       position: fixed;
       will-change: transform;
