@@ -7,8 +7,8 @@
   {% if section.settings.video_url == blank %}
     <iframe src="//www.youtube.com/embed/_9VUPq3SxOc?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
   {% else %}
-    {% if section.settings.video_url.type == "youtube" %}
-      <div id="yt-player-{{ section.settings.video_url.id }}" class="yt-player"></div>
+    {% if section.settings.playlist_url.type == "youtube" %}
+      <div id="yt-player-{{ section.settings.playlist_url.id }}" class="yt-player"></div>
       <script>
         // 2. This code loads the IFrame Player API code asynchronously.
         var tag = document.createElement('script');
@@ -19,16 +19,16 @@
 
         // 3. This function creates an <iframe> (and YouTube player)
         //    after the API code downloads.
-        var player, playlist;
+        var player;
 
         function onYouTubeIframeAPIReady() {
-          player = new YT.Player('yt-player-{{ section.settings.video_url.id }}', {
+          player = new YT.Player('yt-player-{{ section.settings.playlist_url.id }}', {
             height: '480',
             width: '850',
             playerVars: {
               'autoplay': 0,
               listType: 'playlist',
-              list: '{{ section.settings.video_url.id }}',
+              list: '{{ section.settings.playlist_url.id }}',
               index: 0,
               'showinfo': 0,
               'rel': 0
@@ -183,6 +183,36 @@
       "accept": [
         "youtube",
         "vimeo"
+      ]
+    },
+    {
+      "type": "video_url",
+      "id": "playlist_url",
+      "label": {
+        "cs": "Odkaz na video",
+        "da": "Videolink",
+        "de": "Videolink",
+        "en": "Playlist link",
+        "es": "Enlace de video",
+        "fi": "Videolinkki",
+        "fr": "Lien de la vidéo",
+        "it": "Link video",
+        "ja": "ビデオリンク",
+        "ko": "동영상 링크",
+        "nb": "Videokobling",
+        "nl": "Videolink",
+        "pl": "Link filmu",
+        "pt-BR": "Link do vídeo",
+        "pt-PT": "Ligação do vídeo",
+        "sv": "Videolänk",
+        "th": "ลิงก์วิดีโอ",
+        "tr": "Video bağlantısı",
+        "vi": "Liên kết video",
+        "zh-CN": "视频链接",
+        "zh-TW": "影片連結"
+      },
+      "accept": [
+        "youtube"
       ]
     }
   ],
