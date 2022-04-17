@@ -55,13 +55,13 @@
         var done = false;
 
         function onPlayerStateChange(event) {
+          console.log('player', player);
+          console.log('event', event);
           if (event.data == YT.PlayerState.PLAYING) {
               currentIndex = event.target.getPlaylistIndex();
           }
 
           if (event.data == YT.PlayerState.ENDED) {
-            console.log('player', player);
-            console.log('event', event);
             if (currentIndex == (playlist.length-1)) {
               alert('GGEZWP');
             }
