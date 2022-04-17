@@ -27,8 +27,8 @@
 
         function onYouTubeIframeAPIReady() {
           player = new YT.Player('yt-player-{{ section.settings.video_url.id }}', {
-            // height: '390',
-            // width: '640',
+            height: '480',
+            width: '850',
             videoId: '{{ section.settings.video_url.id }}',
             playerVars: {
               'autoplay': 0,
@@ -59,7 +59,7 @@
         var done = false;
 
         function onPlayerStateChange(event) {
-          console.log(event);
+          // console.log(event);
           if (event.data == YT.PlayerState.ENDED) {
             alert(1);
           }
