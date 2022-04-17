@@ -6108,7 +6108,9 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 .featured-slider__slide-content {
   position: relative;
   margin: 0 auto;
-  max-width: 45%;
+  @include media-query($medium-up) {
+    max-width: 45%;
+  }
 }
 
 .featured-slider__slide-image-container {
