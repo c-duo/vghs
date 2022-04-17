@@ -72,15 +72,7 @@
         data-aspectratio="{{ section.settings.cover_banner_image.aspect_ratio }}"
         data-sizes="auto"
         alt="{{ section.settings.cover_banner_image.alt | escape }}">
-      <!-- <div class="pinch-indicators">
-        <div class="pinch-indicator pinch-indicator--top"></div>
-        <div class="pinch-indicator pinch-indicator--bottom"></div>
-      </div> -->
     </div>
-    <!-- <button class="btn btn--clear featured-slider__close reveal-slider__close">
-      <span class="featured-slider__close-icon">{% include 'icon-close' %}</span>
-      <span class="featured-slider__close-circle" style="border-color: {{ section.settings.text_color }}"></span>
-    </button> -->
 
     <div class="featured-slider__slide-list">
       {% for block in section.blocks %}
@@ -88,7 +80,6 @@
           <div class="featured-slider__slide-content grid">
             {% if block.settings.show_image %}
               {% if block.settings.slide_image %}
-              <!-- <div class="featured-slider__slide-image-container grid__item small--one-half" style="padding-top: {{ 1 | divided_by: block.settings.slide_image.aspect_ratio | times: 100}}%"> -->
                 <div class="featured-slider__slide-image-container grid__item small--one-half">
                   {% assign img_url = block.settings.slide_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
                   <img class="featured-slider__slide-image lazyload"
