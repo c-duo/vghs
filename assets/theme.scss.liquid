@@ -5757,6 +5757,22 @@ shopify-payment-terms {
 
 .product-recommendations {
   padding-top: $gutter-site * 3;
+
+  .grid__item {
+    
+
+    @include media-query($large-up) {
+      max-width: 25vw;
+    }
+
+    @include media-query($medium) {
+      max-width: 50vw;
+    }
+
+    @include media-query($small) {
+      max-width: 90vw;
+    }
+  }
 }
 
 .product-recommendations__content {
