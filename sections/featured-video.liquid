@@ -25,11 +25,8 @@
           player = new YT.Player('yt-player-{{ section.settings.video_url.id }}', {
             height: '480',
             width: '850',
-            // videoId: 'PLsMtUWKCmBPRFzqglpk4YQlNFy8wzSXBN',
             playerVars: {
               'autoplay': 0,
-              // 'controls': 0,
-              // 'playlist': 'PLsMtUWKCmBPRFzqglpk4YQlNFy8wzSXBN',
               listType: 'playlist',
               list: 'PLsMtUWKCmBPRFzqglpk4YQlNFy8wzSXBN',
               index: 0,
@@ -45,8 +42,6 @@
 
         // 4. The API will call this function when the video player is ready.
         function onPlayerReady(event) {
-          // event.target.playVideo();
-          player.cuePlaylist();
         }
 
         // 5. The API calls this function when the player's state changes.
