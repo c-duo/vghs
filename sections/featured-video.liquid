@@ -5,14 +5,10 @@
   {% endif %}
 
   {% if section.settings.video_url == blank %}
-
     <iframe src="//www.youtube.com/embed/_9VUPq3SxOc?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
-
   {% else %}
-
     {% if section.settings.video_url.type == "youtube" %}
       <div id="yt-player-{{ section.settings.video_url.id }}" class="yt-player"></div>
-      <!-- <iframe src="//www.youtube.com/embed/{{ section.settings.video_url.id }}?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe> -->
       <script>
         // 2. This code loads the IFrame Player API code asynchronously.
         var tag = document.createElement('script');
@@ -29,7 +25,7 @@
           player = new YT.Player('yt-player-{{ section.settings.video_url.id }}', {
             height: '480',
             width: '850',
-            videoId: '{{ section.settings.video_url.id }}',
+            videoId: 'PLsMtUWKCmBPRFzqglpk4YQlNFy8wzSXBN',
             playerVars: {
               'autoplay': 0,
               // 'controls': 0,
@@ -59,22 +55,18 @@
         var done = false;
 
         function onPlayerStateChange(event) {
-          // console.log(event);
           if (event.data == YT.PlayerState.ENDED) {
             alert('GGEZWP');
           }
         }
 
       </script>
-      {% endif %}
+    {% endif %}
 
     {% if section.settings.video_url.type == "vimeo" %}
       <iframe src="//player.vimeo.com/video/{{ section.settings.video_url.id }}?byline=0&portrait=0&badge=0" width="850" height="480" frameborder="0" allowfullscreen></iframe>
-
     {% endif %}
-
   {% endif %}
-
 </div>
 
 
