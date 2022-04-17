@@ -5783,6 +5783,10 @@ shopify-payment-terms {
 .product-recommendations__list {
   display: flex;
 
+  @include media-query($medium) {
+    width: 200%;
+  }
+
   @include media-query($small) {
     width: 400%;
   }
