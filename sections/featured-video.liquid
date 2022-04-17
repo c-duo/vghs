@@ -5,22 +5,74 @@
   {% endif %}
 
   {% if section.settings.video_url == blank %}
-
     <iframe src="//www.youtube.com/embed/_9VUPq3SxOc?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
-
   {% else %}
-
     {% if section.settings.video_url.type == "youtube" %}
-      <iframe src="//www.youtube.com/embed/{{ section.settings.video_url.id }}?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+      <div id="yt-player-{{ section.settings.video_url.id }}" class="yt-player"></div>
+      <script>
+        // 2. This code loads the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // 3. This function creates an <iframe> (and YouTube player)
+        //    after the API code downloads.
+        var player, playlist;
+
+        function onYouTubeIframeAPIReady() {
+          player = new YT.Player('yt-player-{{ section.settings.video_url.id }}', {
+            height: '480',
+            width: '850',
+            playerVars: {
+              'autoplay': 0,
+              listType: 'playlist',
+              list: '{{ section.settings.video_url.id }}',
+              index: 0,
+              'showinfo': 0,
+              'rel': 0
+            },
+            events: {
+              'onReady': onPlayerReady,
+              'onStateChange': onPlayerStateChange
+            }
+          });
+        }
+
+        // 4. The API will call this function when the video player is ready.
+        function onPlayerReady(event) {
+        }
+
+        // 5. The API calls this function when the player's state changes.
+        // The function indicates that when playing a video (state=1),
+        // -1 unstarted 
+        // 0 ended 
+        // 1 playing
+        // 2 paused
+        // 3 buffering
+        // 5 video cued
+        var done = false;
+
+        // alert when last playlist video has ended
+        function onPlayerStateChange(event) {
+          if (event.data == YT.PlayerState.PLAYING) {
+              currentIndex = event.target.getPlaylistIndex();
+          }
+
+          if (event.data == YT.PlayerState.ENDED) {
+            if (currentIndex == (event.target.getPlaylist().length - 1)) {
+              alert('GGEZWP');
+            }
+          }
+        }
+      </script>
     {% endif %}
 
     {% if section.settings.video_url.type == "vimeo" %}
       <iframe src="//player.vimeo.com/video/{{ section.settings.video_url.id }}?byline=0&portrait=0&badge=0" width="850" height="480" frameborder="0" allowfullscreen></iframe>
-
     {% endif %}
-
   {% endif %}
-
 </div>
 
 
