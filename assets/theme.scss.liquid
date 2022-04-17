@@ -6093,7 +6093,8 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 .featured-slider__slide-list {
   position: relative;
   z-index: 5;
-  @include media-query($medium-up) {
+  @include media-query($small) {
+    width: 90%;
   }
 }
 
@@ -6138,9 +6139,10 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 
 .featured-slider__slide-title {
   margin: ($gutter * 2) 0 $gutter;
-  font-weight: $font-weight-semi-bold;
+  font-size: 1.5em;
+  font-weight: $font-weight-bold;
   letter-spacing: 1px;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 
