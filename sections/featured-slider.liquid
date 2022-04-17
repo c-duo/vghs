@@ -103,13 +103,15 @@
               {% endif %}
             {% endif %}
             {% if block.settings.slide_title != blank or block.settings.slide_button_text != blank%}
-              {% if block.settings.slide_title != blank %}
-                <h3 class="featured-slider__slide-title h6" style="color: {{ section.settings.text_color }}">{{ block.settings.slide_title }}</h3>
-              {% endif %}
-
-              {% if block.settings.slide_button_text != blank %}
-                <a class="btn featured-slider__slide-link{% if section.settings.use_second_button %} btn--secondary{% endif %}" href="{{ block.settings.slide_button_url }}">{{ block.settings.slide_button_text }}</a>
-              {% endif %}
+              <div class="grid__item">
+                {% if block.settings.slide_title != blank %}
+                  <h3 class="featured-slider__slide-title h6" style="color: {{ section.settings.text_color }}">{{ block.settings.slide_title }}</h3>
+                {% endif %}
+  
+                {% if block.settings.slide_button_text != blank %}
+                  <a class="btn featured-slider__slide-link{% if section.settings.use_second_button %} btn--secondary{% endif %}" href="{{ block.settings.slide_button_url }}">{{ block.settings.slide_button_text }}</a>
+                {% endif %}
+              </div>
             {% endif %}
           </div>
         </div>
