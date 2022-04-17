@@ -5761,13 +5761,14 @@ shopify-payment-terms {
 
 .product-recommendations__content {
   display: flex;
+  min-height: 0;
+  flex-direction: column;
+  overflow: scroll;
 }
 
 .product-recommendations__list {
   display: flex;
-  min-height: min-content;
   width: 400%;
-  // align-items: stretch;
 }
 
 $featured-slider-primary-color: #fff;
