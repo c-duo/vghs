@@ -3488,7 +3488,7 @@ $slick-opacity-not-active: 0.25;
 .site-header__cart .icon,
 .site-header__search .icon {
   font-size: em(25);
-  padding: $gutter-site / 4;
+  padding: $gutter-site / 2;
 
   @include media-query($medium-up) {
     padding: $gutter-site / 2;
@@ -3521,8 +3521,7 @@ $slick-opacity-not-active: 0.25;
       border-radius: 50%;
 
       @include media-query($small) {
-        top: 14px;
-        right: 0;
+        top: 16px;
       }
     }
   }
@@ -5758,9 +5757,40 @@ shopify-payment-terms {
 
 .product-recommendations {
   padding-top: $gutter-site * 3;
+
+  .grid__item {
+    @include media-query($large-up) {
+      max-width: 25vw;
+    }
+
+    @include media-query($medium) {
+      max-width: 50vw;
+    }
+
+    @include media-query($small) {
+      max-width: 90vw;
+    }
+  }
 }
 
+.product-recommendations__content {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  overflow: scroll;
+}
 
+.product-recommendations__list {
+  display: flex;
+
+  @include media-query($medium) {
+    width: 200%;
+  }
+
+  @include media-query($small) {
+    width: 400%;
+  }
+}
 
 $featured-slider-primary-color: #fff;
 $featured-slider-close-background-color: rgba(0, 0, 0, 0);
@@ -6093,7 +6123,9 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 .featured-slider__slide-list {
   position: relative;
   z-index: 5;
-  @include media-query($medium-up) {
+  @include media-query($small) {
+    width: 90%;
+    margin: 0 auto;
   }
 }
 
@@ -6108,7 +6140,14 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 .featured-slider__slide-content {
   position: relative;
   margin: 0 auto;
-  max-width: 45%;
+  @include media-query($medium-up) {
+    max-width: 45%;
+  }
+  @include media-query($small) {
+    display: flex;
+    align-items: center;
+    column-gap: 5%;
+  }
 }
 
 .featured-slider__slide-image-container {
@@ -6117,14 +6156,6 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 }
 
 .featured-slider__slide-image {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-
   &.placeholder-svg {
     position: relative;
     max-width: 450px;
@@ -6136,9 +6167,10 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 
 .featured-slider__slide-title {
   margin: ($gutter * 2) 0 $gutter;
-  font-weight: $font-weight-semi-bold;
+  font-size: 1.5em;
+  font-weight: $font-weight-bold;
   letter-spacing: 1px;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 
