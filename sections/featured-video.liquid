@@ -25,7 +25,7 @@
           player = loadPlaylistPlayer();
         }
 
-        function loadPlaylistPlayer () {
+        function loadPlaylistPlayer() {
           return new YT.Player('yt-player-{{ section.settings.playlist_id }}', {
             height: '480',
             width: '850',
@@ -44,9 +44,26 @@
           });
         }
 
+        function loadVideoPlayer() {
+          return new YT.Player('yt-player-{{ section.settings.video_url.id }}', {
+            height: '480',
+            width: '850',
+            videoId: '{{ section.settings.video_url.id }}',
+            playerVars: {
+              'autoplay': 0,
+              // 'controls': 0,
+              'showinfo': 0,
+              'rel': 0
+            },
+            events: {
+              'onReady': onPlayerReady,
+              'onStateChange': onPlayerStateChange
+            }
+          });
+        }
+
         // 4. The API will call this function when the video player is ready.
         function onPlayerReady(event) {
-          console.log(event.target);
         }
 
         // 5. The API calls this function when the player's state changes.
