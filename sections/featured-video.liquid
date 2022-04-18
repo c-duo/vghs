@@ -4,23 +4,107 @@
     <h2 class="text-center section-title">{{ section.settings.heading | escape }}</h2>
   {% endif %}
 
-  {% if section.settings.video_url == blank %}
-
+  {% if section.settings.video_url == blank and section.settings.playlist_id == blank %}
     <iframe src="//www.youtube.com/embed/_9VUPq3SxOc?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
-
   {% else %}
+    {% if section.settings.playlist_id != blank %}
+      <div id="yt-player-{{ section.settings.playlist_id }}" class="yt-player"></div>
+      <script>
+        // 2. This code loads the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
 
-    {% if section.settings.video_url.type == "youtube" %}
-      <iframe src="//www.youtube.com/embed/{{ section.settings.video_url.id }}?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // 3. This function creates an <iframe> (and YouTube player)
+        //    after the API code downloads.
+        var player;
+
+        function onYouTubeIframeAPIReady() {
+          player = loadPlaylistPlayer();
+        }
+
+        function loadPlaylistPlayer() {
+          return new YT.Player('yt-player-{{ section.settings.playlist_id }}', {
+            height: '480',
+            width: '850',
+            playerVars: {
+              'autoplay': 0,
+              listType: 'playlist',
+              list: '{{ section.settings.playlist_id }}',
+              index: 0,
+              'showinfo': 0,
+              'rel': 0
+            },
+            events: {
+              'onReady': onPlayerReady,
+              'onStateChange': onPlayerStateChange
+            }
+          });
+        }
+
+        function loadVideoPlayer() {
+          return new YT.Player('yt-player-{{ section.settings.video_url.id }}', {
+            height: '480',
+            width: '850',
+            videoId: '{{ section.settings.video_url.id }}',
+            playerVars: {
+              'autoplay': 0,
+              // 'controls': 0,
+              'showinfo': 0,
+              'rel': 0
+            },
+            events: {
+              'onReady': onPlayerReady,
+              'onStateChange': onPlayerStateChange
+            }
+          });
+        }
+
+        // 4. The API will call this function when the video player is ready.
+        function onPlayerReady(event) {
+        }
+
+        // 5. The API calls this function when the player's state changes.
+        // The function indicates that when playing a video (state=1),
+        // -1 unstarted 
+        // 0 ended 
+        // 1 playing
+        // 2 paused
+        // 3 buffering
+        // 5 video cued
+        var done = false;
+
+        // alert when last playlist video has ended
+        function onPlayerStateChange(event) {
+          playlistStateChange(event);
+        }
+
+        function playlistStateChange(event) {
+          if (event.data == YT.PlayerState.PLAYING) {
+              currentIndex = event.target.getPlaylistIndex();
+          }
+
+          if (event.data == YT.PlayerState.ENDED) {
+            if (currentIndex == (event.target.getPlaylist().length - 1)) {
+              alert('{{ section.settings.discount_code }}');
+            }
+          }
+        }
+
+        function videoStateChange(event) {
+          if (event.data == YT.PlayerState.ENDED) {
+            alert('{{ section.settings.discount_code }}');
+          }
+        }
+      </script>
     {% endif %}
 
     {% if section.settings.video_url.type == "vimeo" %}
       <iframe src="//player.vimeo.com/video/{{ section.settings.video_url.id }}?byline=0&portrait=0&badge=0" width="850" height="480" frameborder="0" allowfullscreen></iframe>
-
     {% endif %}
-
   {% endif %}
-
 </div>
 
 
@@ -103,6 +187,56 @@
       }
     },
     {
+      "type": "text",
+      "id": "playlist_id",
+      "label": {
+        "cs": "foo",
+        "da": "foo",
+        "de": "foo",
+        "en": "Playlist id",
+        "es": "foo",
+        "fi": "foo",
+        "fr": "foo",
+        "it": "foo",
+        "ja": "foo",
+        "ko": "foo",
+        "nb": "foo",
+        "nl": "foo",
+        "pl": "foo",
+        "pt-BR":"foo",
+        "pt-PT":"foo",
+        "sv": "foo",
+        "th": "foo",
+        "tr": "foo",
+        "vi": "foo",
+        "zh-CN": "foo",
+        "zh-TW": "foo"
+      },
+      "info": {
+        "cs": "foo",
+        "da": "foo",
+        "de": "foo",
+        "en": "Only use playlist OR single video",
+        "es": "foo",
+        "fi": "foo",
+        "fr": "foo",
+        "it": "foo",
+        "ja": "foo",
+        "ko": "foo",
+        "nb": "foo",
+        "nl": "foo",
+        "pl": "foo",
+        "pt-BR": "foo",
+        "pt-PT": "foo",
+        "sv": "foo",
+        "th": "foo",
+        "tr": "foo",
+        "vi": "foo",
+        "zh-CN": "foo",
+        "zh-TW": "foo"
+      }
+    },
+    {
       "type": "video_url",
       "id": "video_url",
       "label": {
@@ -132,6 +266,33 @@
         "youtube",
         "vimeo"
       ]
+    },
+    {
+      "type": "text",
+      "id": "discount_code",
+      "label": {
+        "cs": "Odkaz na video",
+        "da": "Videolink",
+        "de": "Videolink",
+        "en": "Discount code",
+        "es": "Enlace de video",
+        "fi": "Videolinkki",
+        "fr": "Lien de la vidéo",
+        "it": "Link video",
+        "ja": "ビデオリンク",
+        "ko": "동영상 링크",
+        "nb": "Videokobling",
+        "nl": "Videolink",
+        "pl": "Link filmu",
+        "pt-BR": "Link do vídeo",
+        "pt-PT": "Ligação do vídeo",
+        "sv": "Videolänk",
+        "th": "ลิงก์วิดีโอ",
+        "tr": "Video bağlantısı",
+        "vi": "Liên kết video",
+        "zh-CN": "视频链接",
+        "zh-TW": "影片連結"
+      }
     }
   ],
   "presets": [
