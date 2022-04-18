@@ -88,14 +88,14 @@
 
           if (event.data == YT.PlayerState.ENDED) {
             if (currentIndex == (event.target.getPlaylist().length - 1)) {
-              alert('GGEZWP');
+              alert('{{ section.settings.discount_code }}');
             }
           }
         }
 
         function videoStateChange(event) {
           if (event.data == YT.PlayerState.ENDED) {
-            alert('GGEZWP');
+            alert('{{ section.settings.discount_code }}');
           }
         }
       </script>
