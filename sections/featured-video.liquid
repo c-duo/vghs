@@ -4,11 +4,11 @@
     <h2 class="text-center section-title">{{ section.settings.heading | escape }}</h2>
   {% endif %}
 
-  {% if section.settings.video_url == blank %}
+  {% if section.settings.video_url == blank and section.settings.playlist_id == blank %}
     <iframe src="//www.youtube.com/embed/_9VUPq3SxOc?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
   {% else %}
-    {% if section.settings.video_url.type == "youtube" %}
-      <div id="yt-player-{{ section.settings.video_url.id }}" class="yt-player"></div>
+    {% if section.settings.playlist_id != blank %}
+      <div id="yt-player-{{ section.settings.playlist_id }}" class="yt-player"></div>
       <script>
         // 2. This code loads the IFrame Player API code asynchronously.
         var tag = document.createElement('script');
@@ -19,16 +19,16 @@
 
         // 3. This function creates an <iframe> (and YouTube player)
         //    after the API code downloads.
-        var player, playlist;
+        var player;
 
         function onYouTubeIframeAPIReady() {
-          player = new YT.Player('yt-player-{{ section.settings.video_url.id }}', {
+          player = new YT.Player('yt-player-{{ section.settings.playlist_id }}', {
             height: '480',
             width: '850',
             playerVars: {
               'autoplay': 0,
               listType: 'playlist',
-              list: '{{ section.settings.video_url.id }}',
+              list: '{{ section.settings.playlist_id }}',
               index: 0,
               'showinfo': 0,
               'rel': 0
@@ -42,6 +42,7 @@
 
         // 4. The API will call this function when the video player is ready.
         function onPlayerReady(event) {
+          console.log(event.target);
         }
 
         // 5. The API calls this function when the player's state changes.
@@ -184,6 +185,33 @@
         "youtube",
         "vimeo"
       ]
+    },
+    {
+      "type": "text",
+      "id": "playlist_id",
+      "label": {
+        "cs": "Odkaz na video",
+        "da": "Videolink",
+        "de": "Videolink",
+        "en": "Playlist id",
+        "es": "Enlace de video",
+        "fi": "Videolinkki",
+        "fr": "Lien de la vidéo",
+        "it": "Link video",
+        "ja": "ビデオリンク",
+        "ko": "동영상 링크",
+        "nb": "Videokobling",
+        "nl": "Videolink",
+        "pl": "Link filmu",
+        "pt-BR": "Link do vídeo",
+        "pt-PT": "Ligação do vídeo",
+        "sv": "Videolänk",
+        "th": "ลิงก์วิดีโอ",
+        "tr": "Video bağlantısı",
+        "vi": "Liên kết video",
+        "zh-CN": "视频链接",
+        "zh-TW": "影片連結"
+      }
     }
   ],
   "presets": [
