@@ -8,7 +8,7 @@
     <iframe src="//www.youtube.com/embed/_9VUPq3SxOc?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
   {% else %}
     {% if section.settings.playlist_url.type == "youtube" %}
-      <div id="yt-player-{{ section.settings.playlist_url.id }}" class="yt-player"></div>
+      <div id="yt-player-{{ section.settings.playlist_id }}" class="yt-player"></div>
       <script>
         // 2. This code loads the IFrame Player API code asynchronously.
         var tag = document.createElement('script');
@@ -22,13 +22,13 @@
         var player;
 
         function onYouTubeIframeAPIReady() {
-          player = new YT.Player('yt-player-{{ section.settings.playlist_url.id }}', {
+          player = new YT.Player('yt-player-{{ section.settings.playlist_id }}', {
             height: '480',
             width: '850',
             playerVars: {
               'autoplay': 0,
               listType: 'playlist',
-              list: '{{ section.settings.playlist_url.id }}',
+              list: '{{ section.settings.playlist_id }}',
               index: 0,
               'showinfo': 0,
               'rel': 0
@@ -186,13 +186,13 @@
       ]
     },
     {
-      "type": "video_url",
-      "id": "playlist_url",
+      "type": "text",
+      "id": "playlist_id",
       "label": {
         "cs": "Odkaz na video",
         "da": "Videolink",
         "de": "Videolink",
-        "en": "Playlist link",
+        "en": "Playlist id",
         "es": "Enlace de video",
         "fi": "Videolinkki",
         "fr": "Lien de la vidéo",
@@ -210,10 +210,7 @@
         "vi": "Liên kết video",
         "zh-CN": "视频链接",
         "zh-TW": "影片連結"
-      },
-      "accept": [
-        "youtube"
-      ]
+      }
     }
   ],
   "presets": [
