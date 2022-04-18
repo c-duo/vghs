@@ -57,6 +57,10 @@
 
         // alert when last playlist video has ended
         function onPlayerStateChange(event) {
+          playlistStateChange(event);
+        }
+
+        function playlistStateChange(event) {
           if (event.data == YT.PlayerState.PLAYING) {
               currentIndex = event.target.getPlaylistIndex();
           }
