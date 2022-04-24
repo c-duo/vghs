@@ -5937,7 +5937,8 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
     }
   }
 
-  @include media-query($medium-up) {
+  // @include media-query($medium-up) {
+  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) { 
     bottom: 5vh;
     position: fixed;
     transition: bottom 0.15s ease-in;
