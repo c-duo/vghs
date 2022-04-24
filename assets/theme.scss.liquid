@@ -5947,7 +5947,8 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   }
 
   // @include media-query($medium-up) {
-  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) { 
+  // tablet landscape
+  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (min-device-height: 812px) and (orientation : landscape) { 
     bottom: 5vh;
     position: fixed;
     transition: bottom 0.15s ease-in;
@@ -6162,6 +6163,7 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
     max-width: 45%;
   }
+
   @include media-query($medium-down) {
     display: flex;
     align-items: center;
