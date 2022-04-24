@@ -8,7 +8,7 @@
     <iframe src="//www.youtube.com/embed/_9VUPq3SxOc?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
   {% else %}
     {% if section.settings.playlist_id != blank %}
-      <div id="yt-player-{{ section.settings.playlist_id }}" class="yt-player"></div>
+      <div id="yt-player-{{ section.settings.playlist_id }}" class="yt-player video-wrapper"></div>
       <script>
         // 2. This code loads the IFrame Player API code asynchronously.
         var tag = document.createElement('script');
