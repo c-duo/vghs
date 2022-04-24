@@ -5959,15 +5959,16 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   }
 
   @include media-query($small) {
+    padding: 5vh 0 10vh;
   }
   @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
     /* Styles */
-    padding: 5vh 0 10vh;
   }
 }
 
 .featured-slider__cover-content--left {
-  @include media-query($medium-up) {
+  // @include media-query($medium-up) {
+  @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3) {
     left: 8%;
     width: 45%;
   }
