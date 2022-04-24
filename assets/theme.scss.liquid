@@ -5851,8 +5851,8 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 .featured-slider__cover-background--top {
   top: 0;
 
-  // @include media-query($medium-up) {
-  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+  // mobile + tablet landscape
+  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
     .side-scroller--fixed & {
       position: fixed;
       will-change: transform;
@@ -5931,13 +5931,8 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
     width: 100%;
   }
 
-  // @include media-query($large-up) {
-  //   img {
-  //     height: 78vh;
-  //     width: auto;
-  //   }
-  // }
-  @media only screen and (max-device-width : 1024px) and (orientation : landscape),
+  // landscape + large screens, full height banner
+  @media only screen and (orientation : landscape),
          only screen and (min-device-width : $large-up) {
     /* Styles */
     img {
@@ -5946,8 +5941,8 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
     }
   }
 
-  // @include media-query($medium-up) {
-  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) { 
+  // tablet landscape
+  @media only screen and (min-device-width : 768px) and (min-device-height: 812px) and (orientation : landscape) { 
     bottom: 5vh;
     position: fixed;
     transition: bottom 0.15s ease-in;
@@ -5971,14 +5966,11 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   @include media-query($small) {
     padding: 5vh 0 10vh;
   }
-  @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
-    /* Styles */
-  }
 }
 
 .featured-slider__cover-content--left {
-  // @include media-query($medium-up) {
-  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+  // tablet landscape
+  @media only screen and (min-device-width : 768px) and (min-device-height : 812px) and (orientation: landscape) {
     left: 8%;
     width: 45%;
   }
@@ -6130,8 +6122,8 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 .featured-slider__slides-container {
   transition: background-color 1s ease-out;
 
-  // @include media-query($medium-up) {
-  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+  // tablet landscape
+  @media only screen and (min-device-width : 768px) and (min-device-height : 812px) and (orientation : landscape) {
     min-height: 100vh;
     width: 50%;
     margin-left: 50%;
@@ -6158,25 +6150,54 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 .featured-slider__slide-content {
   position: relative;
   margin: 0 auto;
-  // @include media-query($medium-up) {
-  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+  
+  // tablet landscape
+  @media only screen and (min-device-width : 768px) and (min-device-height : 812px) and (orientation : landscape) {
     max-width: 45%;
   }
+
   @include media-query($medium-down) {
     display: flex;
     align-items: center;
     column-gap: 5%;
+    > div {
+      margin: 0 auto;
+      width: 48%;
+    }
   }
-}
 
-.featured-slider__slide-image-container {
-  position: relative;
-  pointer-events: none;
+  .featured-slider__slide-details {
+    // tablet portrait
+    @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+      width: 30%;
+    }
+  
+    // tablet landscape
+    @media only screen and (min-device-width : 768px) and (min-device-height : 812px) and (orientation : landscape) {
+      padding-right: 10%;
+    }
+  }
+  
+  .featured-slider__slide-image-container {
+    position: relative;
+    pointer-events: none;
+    
+    // tablet portrait
+    @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+      padding-left: 5%;
+      width: 60%;
 
-  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
-    /* Styles */
-    img {
-      height: 90vh;
+      img {
+        width: 100%;
+      }
+    }
+    
+    // tablet + mobile landscape
+    @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+      /* Styles */
+      img {
+        height: 90vh;
+      }
     }
   }
 }
