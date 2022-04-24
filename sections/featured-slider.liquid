@@ -80,7 +80,7 @@
           <div class="featured-slider__slide-content">
             {% if block.settings.show_image %}
               {% if block.settings.slide_image %}
-                <div class="featured-slider__slide-image-container small--one-half">
+                <div class="featured-slider__slide-image-container small--one-half medium--one-half">
                   {% assign img_url = block.settings.slide_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
                   <img class="featured-slider__slide-image lazyload"
                     data-src="{{ img_url }}"
@@ -95,7 +95,7 @@
               {% endif %}
             {% endif %}
             {% if block.settings.slide_title != blank or block.settings.slide_button_text != blank%}
-              <div class="small--one-half">
+              <div class="small--one-half medium--one-half">
                 {% if block.settings.slide_title != blank %}
                   <h3 class="featured-slider__slide-title h6" style="color: {{ section.settings.text_color }}">{{ block.settings.slide_title }}</h3>
                 {% endif %}
