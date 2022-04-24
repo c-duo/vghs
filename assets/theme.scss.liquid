@@ -1354,9 +1354,12 @@ svg:not(:root) {
   position: relative;
   overflow: hidden;
   max-width: 100%;
-  padding-bottom: 56.25%;
-  height: 0;
-  height: auto;
+
+  &::after {
+    display: block;
+    content: "";
+    padding-top: 56.25%;
+  }
 
   iframe {
     position: absolute;
