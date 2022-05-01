@@ -5761,10 +5761,6 @@ shopify-payment-terms {
 .product-recommendations {
   padding-top: $gutter-site * 3;
 
-  .product-recommendations__list {
-    width: 850px;
-  }
-
   .grid__item.product-item {
     // max-width: 220px;
     // @include media-query($large-up) {
@@ -5789,15 +5785,8 @@ shopify-payment-terms {
 }
 
 .product-recommendations__list {
-  display: flex;
-
-  @include media-query($medium) {
-    width: 200%;
-  }
-
-  @include media-query($small) {
-    width: 400%;
-  }
+  width: 850px;
+  margin: 0 auto;
 }
 
 $featured-slider-primary-color: #fff;
