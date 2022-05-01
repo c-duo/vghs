@@ -2626,12 +2626,12 @@ textarea {
 
 /*================ Newsletter Form ================*/
 .newsletter {
-  .form--success {
-    width: 50%;
+  .form--success, .wrapper {
+    width: 400px;
     margin: 0 auto;
 
-    @include media-query($small) {
-      width: 80%;
+    @media only screen and (max-device-width : 399px) and (orientation : portrait) {
+      width: 90%;
     }
   }
 }
