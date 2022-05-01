@@ -2630,8 +2630,8 @@ textarea {
     width: 400px;
     margin: 0 auto;
 
-    @include media-query($small) {
-      width: 70%;
+    @media only screen and (max-device-width : 399px) and (orientation : portrait) {
+      width: 90%;
     }
   }
 }
