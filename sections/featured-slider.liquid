@@ -49,7 +49,7 @@
               {% if block.settings.slide_image %}
                 <div class="featured-slider__slide-image-container">
                   {% assign img_url = block.settings.slide_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
-                  <a class="btn featured-slider__slide-link" href="{{ block.settings.slide_button_url }}">
+                  <a href="{{ block.settings.slide_button_url }}">
                     <img class="featured-slider__slide-image lazyload"
                       data-src="{{ img_url }}"
                       data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
