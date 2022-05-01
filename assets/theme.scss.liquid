@@ -4898,20 +4898,18 @@ $slick-opacity-not-active: 0.25;
   margin-bottom: $gutter-site * 1.5;
   width: 100%;
   max-width: 300px;
+
+  @media only screen and (max-device-width : 1024px) and (orientation : portrait) {
+    padding: 0 $gutter-site;
+  }
+
+  @include media-query($small) {
+    margin: 0 auto;
+  }
 }
 
 .product__form--full-width {
   max-width: none;
-}
-
-@media only screen and (max-device-width : 1024px) and (orientation : portrait) {
-  padding: 0 $gutter-site;
-}
-
-@include media-query($small) {
-  .product__form--add-to-cart {
-    margin: 0 auto;
-  }
 }
 
 .btn--add-to-cart {
