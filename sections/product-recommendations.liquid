@@ -8,6 +8,7 @@
 
         {%- comment -%}
           Large and under
+        {%- endcomment -%}
         <div class="product-recommendations__content widescreen--hide">
           {%- assign grid_item_width = 'medium--one-half large-up--one-quarter' -%}
           <div class="product-recommendations__list">
@@ -17,18 +18,17 @@
             {%- endfor -%}
           </div>
         </div>
-        {%- endcomment -%}
         {%- comment -%}
           Widescreen only, needs special gutters
         {%- endcomment -%}
-        <div class="grid grid--no-gutters grid--uniform collection-grid">
-          {%- assign grid_item_width = 'one-eighth' -%}
-          <div class="grid__item one-quarter">&nbsp;</div>
+        <div class="grid grid--no-gutters grid--uniform collection-grid hide widescreen--show">
+          {%- assign grid_item_width = 'widescreen--one-eighth' -%}
+          <div class="grid__item widescreen--one-quarter">&nbsp;</div>
           {%- for product in recommendations.products -%}
             {%- assign price = product.price | money_without_trailing_zeros -%}
             {% include 'product-grid-item' with product_image_spacing: true, vendor_enable: section.settings.vendor_enable %}
           {%- endfor -%}
-          <div class="grid__item one-quarter">&nbsp;</div>
+          <div class="grid__item widescreen--one-quarter">&nbsp;</div>
         </div>
       </div>
     {%- endif -%}
