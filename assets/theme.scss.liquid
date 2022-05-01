@@ -95,7 +95,7 @@ $color-footer-text: {{ settings.color_footer_text }};
 $color-border: {{ settings.color_borders }};
 
 // Form colors
-$color-form: #f4f4f4;
+$color-form: #868AA9; // 40% of #202443 background color
 
 // Helper colors for form error states
 $color-disabled: darken($color-form, 8%);
@@ -2223,15 +2223,19 @@ a {
   min-height: 47px;
   padding: 6px 30px;
 
-  &:hover {
-    background-color: $color-link;
-    color: $color-body;
-    opacity: 0.8;
+  &:hover,
+  &:focus {
+    // background-color: $color-link;
+    // color: $color-body;
+    background-color: $color-action-bar-bg;
+    color: $color-action-bar-text;
+    opacity: 0.7;
+    border: solid 1px #fff;
   }
 
-  &:active,
-  &:focus {
-    background-color: transparent;
+  &:active {
+    // background-color: transparent;
+    opacity: 0.5;
     color: $color-body;
   }
 
@@ -2239,7 +2243,7 @@ a {
   &.disabled {
     background-color: $color-body;
     color: $color-border;
-    opacity: 0.5;
+    opacity: 0.25;
   }
 }
 
@@ -2256,6 +2260,7 @@ a {
     &:focus {
       opacity: 0.8;
       background: $color-btn-primary !important;
+      border: solid 1px #fff;
     }
 
     &[disabled],
@@ -2348,7 +2353,7 @@ html {
 .site-footer {
   background-color: $color-footer;
   color: $color-footer-text;
-  padding: ($gutter-site * 2) $gutter-site;
+  padding: ($gutter-site * 2) $gutter-site 0;
 
   a {
     color: $color-footer-text;
@@ -2626,12 +2631,12 @@ textarea {
 
 /*================ Newsletter Form ================*/
 .newsletter {
-  .form--success {
-    width: 50%;
+  .form--success, .wrapper {
+    width: 400px;
     margin: 0 auto;
 
-    @include media-query($small) {
-      width: 80%;
+    @media only screen and (max-device-width : 399px) and (orientation : portrait) {
+      width: 90%;
     }
   }
 }
@@ -4654,6 +4659,12 @@ $slick-opacity-not-active: 0.25;
   }
 }
 
+.mobile-nav__logo img {
+  width: 50px;
+  margin: 2vh auto;
+  display: block;
+}
+
 /*============================================================================
   Quantity selectors
   - js-qty replaces input[type="number"] where it's used
@@ -4753,6 +4764,11 @@ $slick-opacity-not-active: 0.25;
   @extend .js-qty__adjust--minus;
 }
 
+/*================ Product page ================*/
+.product {
+  margin-top: ($gutter-site / 2);
+}
+
 /*================ Product details wrapper ================*/
 .product__details {
   margin: ($gutter-site * 3) 0 ($gutter-site * 2);
@@ -4764,6 +4780,10 @@ $slick-opacity-not-active: 0.25;
       text-align: center;
       padding: 0 $gutter-site;
     }
+  }
+
+  .product__details-content {
+    padding: 0 $gutter-site;
   }
 }
 
@@ -4898,18 +4918,17 @@ $slick-opacity-not-active: 0.25;
   margin-bottom: $gutter-site * 1.5;
   width: 100%;
   max-width: 300px;
+
+  // @media only screen and (max-device-width : 1024px) and (orientation : portrait) {
+  // }
+
+  @include media-query($small) {
+    margin: 0 auto;
+  }
 }
 
 .product__form--full-width {
   max-width: none;
-}
-
-@include media-query($small) {
-  .product__form--add-to-cart {
-    // margin-bottom: $gutter-site;
-    padding: 0 $gutter-site;
-    margin: 0 auto;
-  }
 }
 
 .btn--add-to-cart {
@@ -5380,6 +5399,16 @@ shopify-payment-terms {
   }
 }
 
+/*================ Robot Challenge ================*/
+
+.shopify-challenge__container {
+  padding: 5vh 3vw;
+
+  .shopify-challenge__button {
+    margin-top: $gutter-site !important;
+  }
+}
+
 /*================ Maps ================*/
 .map-section {
   position: relative;
@@ -5760,39 +5789,12 @@ shopify-payment-terms {
 
 .product-recommendations {
   padding-top: $gutter-site * 3;
-
-  .grid__item {
-    @include media-query($large-up) {
-      max-width: 25vw;
-    }
-
-    @include media-query($medium) {
-      max-width: 50vw;
-    }
-
-    @include media-query($small) {
-      max-width: 90vw;
-    }
-  }
-}
-
-.product-recommendations__content {
-  display: flex;
-  min-height: 0;
-  flex-direction: column;
   overflow: scroll;
 }
 
 .product-recommendations__list {
-  display: flex;
-
-  @include media-query($medium) {
-    width: 200%;
-  }
-
-  @include media-query($small) {
-    width: 400%;
-  }
+  width: 850px;
+  margin: 0 auto;
 }
 
 $featured-slider-primary-color: #fff;
@@ -5963,7 +5965,7 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
     }
   }
 
-  @include media-query($small) {
+  @media only screen and (max-device-width : 1024px) and (orientation : landscape) {
     padding: 5vh 0 10vh;
   }
 }
@@ -6131,8 +6133,10 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
 }
 
 .featured-slider__slide-list {
+  padding-top: 5vh;
   position: relative;
   z-index: 5;
+
   @include media-query($small) {
     width: 90%;
     margin: 0 auto;
@@ -6144,7 +6148,7 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
   text-align: center;
   display: block;
   cursor: default;
-  padding: 10vh 0;
+  padding-bottom: 5vh;
 }
 
 .featured-slider__slide-content {
@@ -6183,7 +6187,7 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
     pointer-events: none;
     
     // tablet portrait
-    @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+    @media only screen and (min-device-width : 468px) and (max-device-width : 1024px) and (orientation : portrait) {
       padding-left: 5%;
       width: 60%;
 
