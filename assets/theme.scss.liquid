@@ -6166,7 +6166,7 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
     pointer-events: none;
     
     // tablet portrait
-    @media only screen and (max-device-width : 1024px) and (orientation : portrait) {
+    @media only screen and (min-device-width : 468px) and (max-device-width : 1024px) and (orientation : portrait) {
       padding-left: 5%;
       width: 60%;
 
@@ -6176,7 +6176,7 @@ $featured-slider-close-background-color: rgba(0, 0, 0, 0);
     }
     
     // tablet + mobile landscape
-    @media only screen and (max-device-width : 1024px) and (orientation : landscape) {
+    @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
       /* Styles */
       img {
         height: 90vh;
