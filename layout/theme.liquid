@@ -65,6 +65,7 @@
 </head>
 
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ request.page_type | handle }}">
+  <a name="page-top"></a>
   <div id="SearchDrawer" class="search-bar drawer drawer--top">
     <div class="search-bar__table">
       <form action="{{ routes.search_url }}" method="get" class="search-bar__table-cell search-bar__form" role="search">
