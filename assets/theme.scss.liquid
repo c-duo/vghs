@@ -2223,16 +2223,16 @@ a {
   min-height: 47px;
   padding: 6px 30px;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: $color-link;
     color: $color-body;
     opacity: 0.8;
     border: solid 1px #fff;
   }
 
-  &:active,
-  &:focus {
-    background-color: transparent;
+  &:active {
+    // background-color: transparent;
     color: $color-body;
   }
 
