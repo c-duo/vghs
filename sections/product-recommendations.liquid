@@ -21,17 +21,17 @@
         {%- comment -%}
           Widescreen only, needs special gutters
         {%- endcomment -%}
-        <div class="grid grid--no-gutters grid--uniform collection-grid">
-          {%- assign grid_item_width = 'one-whole' -%}
-          <div class="grid__item large-up--one-quarter hide large-up--show">&nbsp;</div>
-          <div class="grid__item product-recommendations__list large-up--one-half">
-            {%- for product in recommendations.products -%}
-              {%- assign price = product.price | money_without_trailing_zeros -%}
-              {% include 'product-grid-item' with product_image_spacing: true, vendor_enable: section.settings.vendor_enable %}
-            {%- endfor -%}
-          </div>
-          <div class="grid__item large-up--one-quarter hide large-up--show">&nbsp;</div>
+        <!-- <div class="grid grid--no-gutters grid--uniform collection-grid"> -->
+        {%- assign grid_item_width = 'one-quarter' -%}
+        <!-- <div class="grid__item widescreen--one-quarter hide widescreen--show">&nbsp;</div> -->
+        <div class="grid grid--no-gutters grid--uniform collection-grid product-recommendations__list">
+          {%- for product in recommendations.products -%}
+            {%- assign price = product.price | money_without_trailing_zeros -%}
+            {% include 'product-grid-item' with product_image_spacing: true, vendor_enable: section.settings.vendor_enable %}
+          {%- endfor -%}
         </div>
+          <!-- <div class="grid__item widescreen--one-quarter hide widescreen--show">&nbsp;</div> -->
+        <!-- </div> -->
       </div>
     {%- endif -%}
   {%- else  -%}
