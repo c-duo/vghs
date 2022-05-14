@@ -3084,6 +3084,15 @@ theme.FeaturedSliderSection = (function() {
   return FeaturedSliderSection;
 })();
 
+theme.FeaturedCollectionSection = (function() {
+  function FeaturedCollectionSection(container) {
+    console.log('FeaturedCollectionSection', container);
+    theme.FeaturedCollection.init();
+  }
+
+  return FeaturedCollectionSection;
+})();
+
 theme.FeaturedSliderSection.prototype = _.assignIn(
   {},
   theme.FeaturedSliderSection.prototype,
