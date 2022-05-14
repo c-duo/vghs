@@ -1,6 +1,16 @@
 {%- if section.settings.show_product_recommendations -%}
   {%- if recommendations.performed -%}
     {%- if recommendations.products_count > 0 -%}
+      <script>
+        const windowWidth = $(window).innerWidth();
+        if (windowWidth < 600) {
+          $(selector).each(function(){
+            let string = $.trim($(this).html());
+            string = string.replace(/ ([^ ]*) ([^ ]*)$/,'&nbsp;$1&nbsp;$2');
+            $(this).html(string);
+          });
+        }
+      </script>
       <div class="product-recommendations">
         {%- if section.settings.heading != blank -%}
           <h2 class="h2 text-center">{{ section.settings.heading | escape }}</h2>
