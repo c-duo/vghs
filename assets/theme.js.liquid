@@ -22,6 +22,9 @@ theme.Sections = function Sections() {
       theme.LeftDrawer.close();
     }
   });
+
+
+  theme.hangingWidows('.featured-slider__slide-title, .product-item__title');
 };
 
 theme.Sections.prototype = _.assignIn({}, theme.Sections.prototype, {
@@ -1397,7 +1400,6 @@ theme.FeaturedSlider = (function() {
 
 //     theme.cache.$window.on('resize', $.debounce(_toggleViewState.bind(this)));
     _transitionBanner();
-    theme.hangingWidows('.featured-slider__slide-title');
   }
   
   function _transitionBanner() {
