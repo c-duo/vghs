@@ -1586,6 +1586,23 @@ theme.Collection = (function() {
   };
 })();
 
+theme.FeaturedCollection = (function() {
+  // var selectors = {
+  //   collectionGrid: '.collection-grid',
+  //   collectionSort: '#SortBy',
+  //   tagSort: '#SortTags',
+  //   showMoreButton: '.js-show-more'
+  // };
+
+  function init() {
+    // cacheSelectors();
+    // collectionSorting();
+    // tagSorting();
+    // initPagination();
+    console.log('featured collection');
+  }
+})();
+
 
 {% if settings.cart_type == 'drawer' %}
 /*!
@@ -3264,6 +3281,15 @@ theme.CollectionTemplate = (function() {
   return CollectionTemplate;
 })();
 
+theme.FeaturedCollection = (function() {
+  function FeaturedCollection(container) {
+    theme.FeaturedCollection.container = container;
+    theme.FeaturedCollection.init();
+  }
+
+  return FeaturedCollection;
+})();
+
 /* eslint-disable no-new */
 theme.Product = (function() {
   var settings = {
@@ -4144,12 +4170,11 @@ $(document).ready(function() {
 
   sections.register('action-bar-section', theme.ActionBarSection);
   sections.register('slideshow-section', theme.SlideshowSection);
-//   console.log('registered slideshow-section', theme.SlideshowSection);
   sections.register('featured-slider-section', theme.FeaturedSliderSection);
-//   console.log('registered featured-slider-section', theme.FeaturedSliderSection);
   sections.register('sidebar-menu-section', theme.SidebarMenuSection);
   sections.register('header-section', theme.HeaderSection);
   sections.register('collection-template-section', theme.CollectionTemplate);
+  sections.register('featured-collection-section', theme.FeaturedCollection);
   sections.register('product', theme.Product);
   sections.register('rich-text-section', theme.RichTextSection);
   sections.register('newsletter-signup-section', theme.NewsletterSection);
