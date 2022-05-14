@@ -22,9 +22,6 @@ theme.Sections = function Sections() {
       theme.LeftDrawer.close();
     }
   });
-
-
-  theme.hangingWidows('.featured-slider__slide-title, .product-item__title');
 };
 
 theme.Sections.prototype = _.assignIn({}, theme.Sections.prototype, {
@@ -3807,6 +3804,8 @@ theme.init = function () {
   theme.responsiveVideos();
   theme.checkIfIOS();
   theme.productCardImageLoadingAnimation();
+
+  theme.hangingWidows('.featured-slider__slide-title, .product-item__title');
 };
 
 /**
