@@ -18,10 +18,12 @@
 
         {%- assign grid_item_width = 'one-quarter' -%}
         <div class="grid grid--no-gutters grid--uniform collection-grid product-recommendations__list">
-          {%- for product in recommendations.products -%}
-            {%- assign price = product.price | money_without_trailing_zeros -%}
-            {% include 'product-grid-item' with product_image_spacing: true, vendor_enable: section.settings.vendor_enable %}
-          {%- endfor -%}
+          <div class="product-recommendations__list-container">
+            {%- for product in recommendations.products -%}
+              {%- assign price = product.price | money_without_trailing_zeros -%}
+              {% include 'product-grid-item' with product_image_spacing: true, vendor_enable: section.settings.vendor_enable %}
+            {%- endfor -%}
+          </div>
         </div>
       </div>
     {%- endif -%}
