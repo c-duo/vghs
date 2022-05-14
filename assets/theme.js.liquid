@@ -1586,23 +1586,20 @@ theme.Collection = (function() {
   };
 })();
 
-theme.FeaturedCollection = (function() {
-  // var selectors = {
-  //   collectionGrid: '.collection-grid',
-  //   collectionSort: '#SortBy',
-  //   tagSort: '#SortTags',
-  //   showMoreButton: '.js-show-more'
-  // };
-
+theme.FeaturedSlider = (function() {
   function init() {
-    // cacheSelectors();
-    // collectionSorting();
-    // tagSorting();
-    // initPagination();
-    console.log('featured collection');
+    initFeaturedCollection();
   }
-})();
 
+  function initFeaturedCollection() {
+    console.log('initFeaturedCollection', this);
+    theme.hangingWidows('.featured-slider__slide-title');
+  }
+
+  return {
+    init: init
+  };
+})();
 
 {% if settings.cart_type == 'drawer' %}
 /*!
