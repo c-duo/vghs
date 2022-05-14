@@ -1417,11 +1417,7 @@ theme.FeaturedSlider = (function() {
   };
 
   function _hangingWidows() {
-    var windowWidth = $(window).innerWidth();
-
-    if (windowWidth < 600) {
-      theme.hangingWidows('.featured-slider__slide-title');
-    }
+    theme.hangingWidows('.featured-slider__slide-title');
   }
 
   // function _toggleViewState() {
@@ -3920,11 +3916,14 @@ theme.drawersInit = function () {
 };
 
 theme.hangingWidows = function (selector) {
-  $(selector).each(function(){
-    var string = $.trim($(this).html());
-    string = string.replace(/ ([^ ]*) ([^ ]*)$/,'&nbsp;$1&nbsp;$2');
-    $(this).html(string);
-  });
+  const windowWidth = $(window).innerWidth();
+  if (windowWidth < 600) {
+    $(selector).each(function(){
+      let string = $.trim($(this).html());
+      string = string.replace(/ ([^ ]*) ([^ ]*)$/,'&nbsp;$1&nbsp;$2');
+      $(this).html(string);
+    });
+  }
 }
 
 theme.searchFocus = function () {
