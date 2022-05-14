@@ -30,15 +30,15 @@
             height: '480',
             width: '850',
             playerVars: {
-              'autoplay': 0,
+              autohide: 1,
+              autoplay: 0,
               controls: 0,
               listType: 'playlist',
               list: '{{ section.settings.playlist_id }}',
               index: 0,
-              modestbranding: 1,
               playsinline: 0,
-              'showinfo': 0,
-              'rel': 0
+              showinfo: 0,
+              rel: 0
             },
             events: {
               'onReady': onPlayerReady,
