@@ -3804,8 +3804,6 @@ theme.init = function () {
   theme.responsiveVideos();
   theme.checkIfIOS();
   theme.productCardImageLoadingAnimation();
-
-  theme.hangingWidows('.featured-slider__slide-title, .product-item__title');
 };
 
 /**
@@ -4158,4 +4156,7 @@ $(document).ready(function() {
   sections.register('map-section', theme.Maps);
   sections.register('password-content-section', theme.PasswordContentSection);
   sections.register('product-recommendations', theme.ProductRecommendations);
+
+
+  theme.hangingWidows('.featured-slider__slide-title, .product-item__title');
 });
