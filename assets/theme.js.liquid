@@ -1413,56 +1413,64 @@ theme.FeaturedSlider = (function() {
           $this.removeClass('bottom');
         }
     });
-};
+  };
 
-  function _toggleViewState() {
-    console.log('toggleViewState');
+  function _hangingWidows() {
     var windowWidth = $(window).innerWidth();
-    var enableMobileView;
-    var enableDesktopView;
 
-    if (typeof this.mobileViewEnabled === 'undefined') {
-      enableMobileView = windowWidth < theme.mediaQuerySmall;
-      enableDesktopView = windowWidth >= theme.mediaQuerySmall;
-    } else {
-      enableMobileView =
-        windowWidth < theme.mediaQuerySmall && !this.mobileViewEnabled;
-      enableDesktopView =
-        windowWidth >= theme.mediaQuerySmall && this.mobileViewEnabled;
-    }
-
-    if (enableMobileView) {
-      this.mobileViewEnabled = true;
-      _destroyDesktopState();
-      _enableMobileState();
-    }
-
-    if (enableDesktopView) {
-      this.mobileViewEnabled = false;
-      _destroyMobileState();
-      _enableDesktopState();
+    if (windowWidth < 600) {
+      theme.hangingWidows('.featured-slider__slide-title');
     }
   }
 
-  function _enableDesktopState() {
-    this.initSideScroller();
-  }
+  // function _toggleViewState() {
+  //   console.log('toggleViewState');
+  //   var windowWidth = $(window).innerWidth();
+  //   var enableMobileView;
+  //   var enableDesktopView;
 
-  function _destroyDesktopState() {
-    if (typeof this.sideScroller !== 'undefined') {
-      this.destroySideScroller();
-    }
-  }
+  //   if (typeof this.mobileViewEnabled === 'undefined') {
+  //     enableMobileView = windowWidth < theme.mediaQuerySmall;
+  //     enableDesktopView = windowWidth >= theme.mediaQuerySmall;
+  //   } else {
+  //     enableMobileView =
+  //       windowWidth < theme.mediaQuerySmall && !this.mobileViewEnabled;
+  //     enableDesktopView =
+  //       windowWidth >= theme.mediaQuerySmall && this.mobileViewEnabled;
+  //   }
 
-  function _enableMobileState() {
-    this.initRevealSlider();
-  }
+  //   if (enableMobileView) {
+  //     this.mobileViewEnabled = true;
+  //     _destroyDesktopState();
+  //     _enableMobileState();
+  //   }
 
-  function _destroyMobileState() {
-    if (this.revealSlider) {
-      this.destroyRevealSlider();
-    }
-  }
+  //   if (enableDesktopView) {
+  //     this.mobileViewEnabled = false;
+  //     _destroyMobileState();
+  //     _enableDesktopState();
+  //   }
+  // }
+
+  // function _enableDesktopState() {
+  //   this.initSideScroller();
+  // }
+
+  // function _destroyDesktopState() {
+  //   if (typeof this.sideScroller !== 'undefined') {
+  //     this.destroySideScroller();
+  //   }
+  // }
+
+  // function _enableMobileState() {
+  //   this.initRevealSlider();
+  // }
+
+  // function _destroyMobileState() {
+  //   if (this.revealSlider) {
+  //     this.destroyRevealSlider();
+  //   }
+  // }
 
   return {
     init: init
@@ -3909,6 +3917,14 @@ theme.drawersInit = function () {
   });
   theme.SearchDrawer = new theme.Drawers('SearchDrawer', 'top', {'onDrawerOpen': theme.searchFocus});
 };
+
+theme.hangingWidows = function (selector) {
+  $(selector).each(function(){
+    var string = $.trim($(this).html());
+    string = string.replace(/ ([^ ]*) ([^ ]*)$/,'&nbsp;$1&nbsp;$2');
+    $(this).html(string);
+  });
+}
 
 theme.searchFocus = function () {
   theme.cache.$searchInput.focus();
