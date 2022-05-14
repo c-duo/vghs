@@ -200,11 +200,11 @@
             {{ form | payment_terms }}
 
             {% if product.available %}
-              <button id="AddToCart-{{ section.id }}" type="submit" name="add" class="btn btn--add-to-cart{% if section.settings.enable_payment_button and product.selling_plan_groups == empty %} btn--secondary-accent{% endif %}">
+              <button id="AddToCart-{{ section.id }}" type="submit" name="add" class="btn btn--add-to-cart{% if section.settings.enable_payment_button and product.selling_plan_groups == empty %}{% endif %}">
                 <span class="btn__text">{{ 'products.product.add_to_cart' | t }}</span>
               </button>
             {% else %}
-              <button type="button" class="btn btn--add-to-cart btn--disabled{% if section.settings.enable_payment_button %} btn--secondary-accent{% endif %}" disabled="disabled">
+              <button type="button" class="btn btn--add-to-cart btn--disabled{% if section.settings.enable_payment_button %}{% endif %}" disabled="disabled">
                 {{ 'products.product.sold_out' | t }}
               </button>
             {% endif %}
