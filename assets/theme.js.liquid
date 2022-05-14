@@ -1352,6 +1352,7 @@ theme.FeaturedSlider = (function() {
   function init() {
 //     cacheSelectors();
     initFeaturedSlider();
+    theme.hangingWidows('.featured-slider__slide-title, .product-item__title');
   }
 
 //   function cacheSelectors() {
@@ -4156,7 +4157,4 @@ $(document).ready(function() {
   sections.register('map-section', theme.Maps);
   sections.register('password-content-section', theme.PasswordContentSection);
   sections.register('product-recommendations', theme.ProductRecommendations);
-
-
-  theme.hangingWidows('.featured-slider__slide-title, .product-item__title');
 });
