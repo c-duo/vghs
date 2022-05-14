@@ -1586,7 +1586,7 @@ theme.Collection = (function() {
   };
 })();
 
-theme.FeaturedSlider = (function() {
+theme.FeaturedCollection = (function() {
   function init() {
     initFeaturedCollection();
   }
@@ -3276,15 +3276,6 @@ theme.CollectionTemplate = (function() {
   }
 
   return CollectionTemplate;
-})();
-
-theme.FeaturedCollection = (function() {
-  function FeaturedCollection(container) {
-    theme.FeaturedCollection.container = container;
-    theme.FeaturedCollection.init();
-  }
-
-  return FeaturedCollection;
 })();
 
 /* eslint-disable no-new */
