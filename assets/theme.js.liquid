@@ -1586,16 +1586,6 @@ theme.Collection = (function() {
   };
 })();
 
-theme.FeaturedCollection = (function() {
-  function init() {
-    console.log('init featuredcollection');
-    // theme.hangingWidows('.featured-slider__slide-title');
-  }
-
-  return {
-    init: init
-  };
-})();
 
 {% if settings.cart_type == 'drawer' %}
 /*!
@@ -3084,15 +3074,6 @@ theme.FeaturedSliderSection = (function() {
   return FeaturedSliderSection;
 })();
 
-theme.FeaturedCollectionSection = (function() {
-  function FeaturedCollectionSection(container) {
-    console.log('FeaturedCollectionSection', container);
-    theme.FeaturedCollection.init();
-  }
-
-  return FeaturedCollectionSection;
-})();
-
 theme.FeaturedSliderSection.prototype = _.assignIn(
   {},
   theme.FeaturedSliderSection.prototype,
@@ -4167,7 +4148,6 @@ $(document).ready(function() {
   sections.register('sidebar-menu-section', theme.SidebarMenuSection);
   sections.register('header-section', theme.HeaderSection);
   sections.register('collection-template-section', theme.CollectionTemplate);
-  sections.register('featured-collection-section', theme.FeaturedCollection);
   sections.register('product', theme.Product);
   sections.register('rich-text-section', theme.RichTextSection);
   sections.register('newsletter-signup-section', theme.NewsletterSection);
