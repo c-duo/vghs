@@ -1396,8 +1396,8 @@ theme.FeaturedSlider = (function() {
 //     _toggleViewState();
 
 //     theme.cache.$window.on('resize', $.debounce(_toggleViewState.bind(this)));
-      _transitionBanner();
-      _hangingWidows();
+    _transitionBanner();
+    theme.hangingWidows('.featured-slider__slide-title');
   }
   
   function _transitionBanner() {
@@ -1415,10 +1415,6 @@ theme.FeaturedSlider = (function() {
         }
     });
   };
-
-  function _hangingWidows() {
-    theme.hangingWidows('.featured-slider__slide-title');
-  }
 
   // function _toggleViewState() {
   //   console.log('toggleViewState');
