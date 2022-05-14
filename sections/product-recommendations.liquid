@@ -4,7 +4,7 @@
       <script>
         const windowWidth = $(window).innerWidth();
         if (windowWidth < 600) {
-          $(selector).each(function(){
+          $('.product__details h1, .product-item__title').each(function(){
             let string = $.trim($(this).html());
             string = string.replace(/ ([^ ]*) ([^ ]*)$/,'&nbsp;$1&nbsp;$2');
             $(this).html(string);
